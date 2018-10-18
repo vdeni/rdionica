@@ -15,16 +15,17 @@ knitr::opts_chunk$set(collapse = T)
 #' 
 #' Za početak, pogledat ćemo kako možemo izvršavati jednostavne naredbe direktno
 #' u R konzoli.
-#' 
+
 #' Kad god u R konzolu unesemo naredbu koju R smatra valjanom te
 #' pritisnemo `Enter` (također poznat kao `Return`), R će u konzoli izbaciti
 #' rezultat izvršavanja te naredbe. Na primjer, ako u konzolu unesemo `2 + 2`, R
 #' će izbaciti rezultat te operacije.
-#' 
+
 2 + 2
 
 #' Isto možemo napraviti s dijeljenjem (`/`), množenjem (`*`), oduzimanjem (`-`) i potenciranjem (`^`).
 #+ collapse = T
+
 4 / 2
 
 2 * 3
@@ -36,6 +37,7 @@ knitr::opts_chunk$set(collapse = T)
 #' Poseban operator koji nekad zna biti koristan je *modulo* - `%%` - koji vraća
 #' cijelobrojni dio dijeljenja dvaju brojeva. Na primjer:
 #' 
+
 # (Linije koje sadrže komentare započinju sa znakom #. R ne interpretira te linije.)
 # Obično dijeljenje:
 5 / 2
@@ -58,18 +60,20 @@ knitr::opts_chunk$set(collapse = T)
 #' 
 #' Prva funkcija koju ćemo pogledati, a koja nadopunjava matematičke operacije s
 #' kojima smo započeli je `sqrt`, kojom možemo dobiti korijen nekog broja.
+
 sqrt(4)
 
 #' Druga, koja se u R-u javlja **jako** često, je `c` (što je, prema Adleru
 #' [2012] skraćeno za *combine*). `c` uzima $N$ argumenata i spaja ih u
 #' **vektor**.
 #' 
+
 # navodnici su bitni! ali mogu biti jednostruki ili dvostruki,
 # bitno je samo da je riječ omeđena jednakim parom
 # npr 'a' je oke, "a' nije oke, ali zato "a" je
-print(c('patka', "krava", 'pile', "krumpir"))
+c('patka', "krava", 'pile', "krumpir")
 
-print(c(5, 4, 3, 2, 1))
+c(5, 4, 3, 2, 1)
 
 #' Koristeći `c`, stvorili smo dva vektora. Vektori spadaju među osnovne
 #' strukture podataka u R-u. Vektori mogu sadržavati proizvoljan broj elemenata
@@ -88,12 +92,13 @@ print(c(5, 4, 3, 2, 1))
 #' 
 #' Varijablu imenujemo (eng. *declare*) tako što neki poluproizvoljan naziv
 #' spojimo s nekom vrijednosti, koristeći operator `<-`. Na pimjer:
-#' 
+
 a <- 2
 
 #' Ako sad u konzolu unesemo `a`, konzola će nam vratiti vrijednost te
 #' varijable. Isti rezultat dobili bismo ako bismo `a` iskoristili kao argument
 #' `print` funkcije (`print(a)`).
+
 print(a)
 
 #' Vrijednosti varijablama možemo pridavati (eng. *assign*) i koristeći znak `=`
@@ -106,19 +111,21 @@ b
 #' Imena varijabli mogu sadržavati slova, brojeve, točke (`.`) i underscoreove
 #' (čija hrvatska imena ne znam; `_`). Imena varijabli ne mogu započinjati s
 #' točkom koju prati broj. Na primjer:
-#' 
 #+ error = T
+
 .3 <- 5
 
 #' Također, imena varijabli ne mogu biti izrazi koji su rezervirani u samom
 #' programskom jeziku, kao što je `for` (koji se koristi za iniciranje petlji).
 #+ error = T
+
 for <- 5
 
 #' Funkcija koja zna biti zgodna kod imenovanja varijabli je `exists`, koja kao
 #' argument prima izraz u navodnicima (što je poznato kao **string**) te vraća
 #' `TRUE` ili `FALSE` ovisno o tom je li objekt istog imena pronađen ili ne.
 #' 
+
 # varijabla koju smo ranije stvorili
 exists('a')
 
@@ -138,7 +145,7 @@ exists('maca')
 #' R-ovskog) napora. Također, savjetovao bih da izbjegavate korištenje
 #' "hrvatskih" znakova (č, ć, ž, š, đ) u svom kodu; korištenje tih znakova može
 #' izazvati snažne glavobolje.
-#' 
+ 
 domace_zivotinje_i_krumpir <- c('patka', 'krava', 'pile', 'krumpir')
 
 brojevi.5.do.1 <- c(5, 4, 3, 2, 1)
@@ -146,7 +153,7 @@ brojevi.5.do.1 <- c(5, 4, 3, 2, 1)
 #' Kao i kad smo varijabli `a` pripisali vrijednost `2`, ni sada ne dobivamo
 #' nikakav output u konzoli. Ali možemo koristiti `print` ili samo upisati ime
 #' varijable u konzolu kako bismo dobili njenu vrijednost.
-#' 
+ 
 domace_zivotinje_i_krumpir
 
 brojevi.5.do.1
@@ -154,7 +161,7 @@ brojevi.5.do.1
 #' Sad kad smo svoje vektore pripisali varijablama, možemo dohvaćati pojedine
 #' vrijednosti iz njih. Na primjer, ako želimo dohvatiti prvu vrijednost iz
 #' vektora `domace_zivotinje_i_krumpir`, možemo učiniti ovo:
-#' 
+ 
 domace_zivotinje_i_krumpir[1]
 
 #' `1` je, u ovom slučaju, **indeks**. U R-u, za razliku od većine drugih
@@ -166,12 +173,12 @@ brojevi.5.do.1[3]
 
 #' Zadnji element možemo dohvatiti pomoću funkcije `length`, koja vraća duljinu
 #' vektora, tj. broj elemenata koji se u njemu nalaze. Na primjer:
-#' 
+ 
 length(domace_zivotinje_i_krumpir)
 
 #' Budući da broj elemenata ujedno označava i posljednji element, možemo učiniti
 #' sljedeće:
-#' 
+ 
 # dohvaćanje pomoću indeksa
 domace_zivotinje_i_krumpir[4]
 
@@ -187,7 +194,7 @@ domace_zivotinje_i_krumpir[4] ==
 #' 
 #' Također, vidjeli smo da možemo koristiti `==` kako bismo provjerili jesu li
 #' dva objekta, odnosno dvije varijable jednake. Na primjer
-#' 
+ 
 2 + 2 == 4
 
 4 == 4
@@ -208,7 +215,7 @@ domace_zivotinje_i_krumpir[4] ==
 #'
 #'Pogledat ćemo nekoliko primjera ovih tipova, te vidjeti kako možemo provjeriti
 #'kojeg je neka varijabla ili vrijednost tipa.
-#'
+
 # character
 'susjed'
 
@@ -244,9 +251,9 @@ is.numeric(1.5115)
 
 #' Za pisanje decimalnih brojeva **moramo koristiti točku**.
 #+ error = T
+
 is.numeric(1,4141)
 
-#+ error = T
 1,5151 + 1
 
 #' Posljednji tip je `logical`:
@@ -295,6 +302,7 @@ is.numeric(5.911)
 #' najčešće javljaju.
 #' 
 #' Za ponavljanje, stvorit ćemo novi vektor:
+ 
 c('vektor', 'od', '4', 'elementa')
 
 # možemo provjeriti je li neki objekt vektor koristeći is.vector
@@ -313,14 +321,15 @@ is.character(c('vektor', 'od', '4', 'elementa'))
 #' struktura, koje žele gledati samo jedan tip podataka).
 #' 
 #' `data.frame` možemo stvoriti koristeći istoimenu funkciju:
-#' 
-print(data.frame('brojke' = c(1, 2, 3, 4, 5),
+ 
+data.frame('brojke' = c(1, 2, 3, 4, 5),
                  'slova' = c('a', 'b', 'de', 'ce', 'fe'),
-                 'logike'= c(F, F, T, T, F)))
+                 'logike'= c(F, F, T, T, F))
 
 #' Pri stvaranju novog `data.framea`, svi redovi moraju imati vrijednosti na
 #' svim stupcima jer će se R inače požaliti.
 #+ error = T
+
 data.frame('brojke' = c(1, 2, 3, 4, 5),
            'slova' = c('a', 'b', 'de', 'ce', 'fe'),
            # maknuli smo zadnjji element (F) iz stupca 'logike'
@@ -364,7 +373,7 @@ brojke_i_slova
 #' Ako jedan od indeksa izostavimo, ali stavimo zarez, R će vratiti sve elemente
 #' na odgovarajućem mjestu, odnosno vratit će sve redove ako izostavimo prvi
 #' indeks i sve stupce ako izostavimo drugi indeks.
-#' 
+ 
 # svi stupci prvog  reda
 brojke_i_slova[1, ]
 
@@ -380,24 +389,24 @@ brojke_i_slova[1:3, ]
 
 #' Za dohvaćanje vrijednosti koje nisu uzastopne, možemo koristiti funkciju `c`,
 #' koju također možemo kombinirati s `n:m` sintaksom:
-#' 
+ 
 # prva tri reda i redovi 7 do 12, te stupci 1 i 3
 brojke_i_slova[c(1:3, 7:12), c(1, 3)]
 
 #' Stupcima možemo pristupati i pomoću njihovih imena:
-#' 
+ 
 brojke_i_slova[1:3, c('logike', 'brojke')]
 
 #' Naposljetku, **jednom** određenom stupcu možemo pristupiti koristeći `$`
 #' operator:
-#' 
+ 
 brojke_i_slova$logike
 
 #' Prije nego što prijeđemo na sljedeću strukturu podataka, upoznat ćemo se s
 #' funkcijom `str` (structure). To je funkcija koja kao input prima neki objekt
 #' i vraća prikaz njegove strukture. Primjerice, možemo pogledati kakva je
 #' struktura našeg `data.framea` `brojke_i_slova`.
-#' 
+ 
 str(brojke_i_slova)
 
 #' R nas informira da je `brojke_i_slova` objekt tipa `data.frame` te da sadrži
@@ -408,12 +417,12 @@ str(brojke_i_slova)
 #' 
 #' `factor` je tip koji R koristi za reprezentiranje kategoričkih varijabli.
 #' `factor` možemo stvoriti pozivanjem istoimene funkcije:
-#' 
-print(factor(c('pas', 'mačka', 'mačka', 'pas', 'pas')))
+ 
+factor(c('pas', 'mačka', 'mačka', 'pas', 'pas'))
 
 #' Ispod sadržaja ovog vektora navedene su razine koje on može poprimiti
 #' (`levels`). Razine možemo dohvatiti i pozivom funkcije `levels`:
-#' 
+ 
 zvijeri <- factor(c('pas', 'mačka', 'mačka', 'pas', 'pas'))
 levels(zvijeri)
 str(zvijeri)
@@ -421,10 +430,10 @@ str(zvijeri)
 #' Faktori se koriste i za reprezentiranje rangiranih podatka. U tom slučaju
 #' potrebno je funkciji `factor` dodati argument `ordered` i dati mu vrijednost
 #' `TRUE`. Osim toga, potrebno je eksplicirati koji je redoslijed razina.
-#' 
+ 
 prihodi <- factor(c('srednji', 'niski', 'visoki', 'visoki', 'srednji'),
                   ordered = T, levels = c('visoki', 'srednji', 'niski'))
-print(prihodi)
+prihodi
 str(prihodi)
 
 #' Sad kad smo se upoznali s faktorima, prijeći ćemo na liste.
@@ -433,23 +442,23 @@ str(prihodi)
 #' 
 #' Lista je uređeni skup elemenata. Listu možemo definirati koristeći funkciju
 #' `list`:
-#' 
+ 
 list('franz', 'liszt')
 
 #' Objekti u listi ne moraju biti istog tipa. Na primjer, možemo napraviti listu
 #' koja sadrži jedan `character`, jedan `integer` i jedan `numeric`.
-#' 
+ 
 spisak <- list('franz', 1L, 3.14)
-print(spisak)
+spisak
 
 #' Brojevi u dvostrukim uglatim zagradama (`[[n]]`) daju nam do znanja da lista
 #' ima 3 elementa. To možemo potvrditi pozivom funkcije `str` na `spisku`.
-#' 
+ 
 str(spisak)
 
 #' Ovdje vidimo i da `spisak` sadrži elemente različitih tipova. Liste možemo
 #' puniti raznolikim objektima, čak i drugim listama.
-#' 
+ 
 raznoliki_objekti <- list(# pojedine elemente listi možemo i imenovati
     imena = c('Ramiro', 'Zorro', 'Vladimir'),
     brojevi = c(3.61, 4.15, 7.151, 20:25),
@@ -460,20 +469,20 @@ str(raznoliki_objekti)
 
 #' Imenovanim elementima listi možemo pristupati isto kao i stupcima
 #' `data.framea`:
-#' 
-print(raznoliki_objekti$imena)
+ 
+raznoliki_objekti$imena
 
-print(raznoliki_objekti[2])
+raznoliki_objekti[2]
 
 #' Također, možemo dohvatiti više elemenata odjednom.
-#' 
+ 
 raznoliki_objekti[c('imena', 'brojevi')]
 
 raznoliki_objekti[2:3]
 
 #' Kad imamo ugniježđene (eng. *nested*) strukture, možemo ulančavati operatore
 #' za dohvaćanje kako bismo ušli dublje u strukture.
-#' 
+ 
 raznoliki_objekti$inception$glumci
 
 raznoliki_objekti['inception']['broj_kamera']
@@ -482,23 +491,23 @@ raznoliki_objekti['inception']['broj_kamera']
 #' koja je spremljena u `broj_kamera` je 5). Kad pogledamo output koji daje
 #' `str`, vidimo da `raznoliki_objekti['inception']` vraća listu koja ima jedan
 #' element, koji je lista koja ima dva elementa.
-#' 
+ 
 str(raznoliki_objekti['inception'])
 
 #' Kako bismo došli do broja kamera, možemo učiniti sljedeće:
-#' 
+ 
 raznoliki_objekti['inception']$inception$broj_kamera
 
 #' Do ove zavrzlame dolazi zbog operatora `[]`, koji vraća listu kad je
 #' primijenjen na listi. Ako želimo vratiti samo objekt koji se nalazi pod
 #' imenom `inception`, možemo koristiti operator `[[]]`.
-#' 
+ 
 str(raznoliki_objekti[['inception']])
 
 #' Sada dobivamo listu (umjesto liste lista), te možemo direktno dohvatiti broj
 #' kamera na bilo koji od dosad spomenutih načina. Učinit ćemo to te se pritom
 #' osvrnuti na ishode različitih metoda dohvaćanja.
-#' 
+ 
 str(raznoliki_objekti[['inception']]$broj_kamera)
 
 str(raznoliki_objekti[['inception']]['broj_kamera'])
@@ -509,7 +518,7 @@ str(raznoliki_objekti$inception$broj_kamera)
 
 #' Pogledat ćemo kako se ovi operatori ponašaju na varijabli `glumci`, koja
 #' sadrži 2 elementa.
-#' 
+ 
 str(raznoliki_objekti[['inception']]$glumci)
 
 str(raznoliki_objekti[['inception']]['glumci'])
@@ -527,6 +536,7 @@ str(raznoliki_objekti$inception$glumci[[2]])
 #'- `[[]]` može baratati parcijalnim imenima ako se argumentu `exact` da
 #' vrijednost `FALSE`, a `[]` nema tu mogućnost
 #+ error = T
+
 str(raznoliki_objekti[['ince', exact = F]])
 
 str(raznoliki_objekti)
@@ -547,32 +557,32 @@ str(raznoliki_objekti['ince', exact = F])
 #' 
 #' Matrica je 2D objekt koji sadrži elemente istog tipa. Možemo je stvoriti
 #' koristeći funkciju `matrix`.
-#' 
+ 
 postava <- matrix(c('Neo', 150, 'Morpheus', 165, 'Agent Smith', 140),
                   # broj redova i stupaca matrice
                   nrow = 3, ncol = 2,
                   # trebaju li se podaci upisivati red po red ili stupac po stupac
                   # default je F
                   byrow = T)
-print(postava)
+postava
 
 #' Dimenzije matrice možemo dohvatiti funkcijom `dim`, koja je primijenjiva i na
 #' `data.frame` (ali ne i na liste).
-#' 
+ 
 dim(postava)
 
 #' Redovima i stupcima matrica možemo dati imena, radi lakšeg orijentiranja:
-#' 
+ 
 dimnames(postava) <- list(
     # imena redova
     c('lepi', 'pametni', 'zli'),
     # imena stupaca
     c('ime', 'visina'))
-print(postava)
+postava
 
 #' Imena redova možemo dohvatiti funkcijom `rownames`, a imena stupaca funkcijom
 #' `colnames`.
-#' 
+ 
 rownames(postava)
 
 colnames(postava)
@@ -588,7 +598,7 @@ names(raznoliki_objekti)
 
 #' Elementima možemo pristupati pomoću `[]` operatora (po istom principu kao i
 #' kod `data.framea`), ali ne i pomoću `$` operatora.
-#' 
+ 
 postava[2:3, 'ime']
 
 #' Ovime ćemo završiti uvod u R te se baciti na pripremu podataka za obradu.
