@@ -436,6 +436,14 @@ prihodi <- factor(c('srednji', 'niski', 'visoki', 'visoki', 'srednji'),
 prihodi
 str(prihodi)
 
+#' U kodu gore, `ordered` i `levels` su imenovani (named) argumenti. Imenovani
+#' argumenti se razlikuju od pozicijskih (eng. *positional*) po tome što nije
+#' bitno kojim ih redoslijedom postavljamo. Isti efekt dobili bismo da smo prvo
+#' napisali `levels`, a potom `ordered`. 
+#'
+#' Nekad se možemo izvući bez da argumente imenujemo, ali nekad će R baciti
+#' error, tako da tu razliku treba imati na umu.
+
 #' Sad kad smo se upoznali s faktorima, prijeći ćemo na liste.
 #' 
 #' ### list
