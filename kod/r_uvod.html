@@ -318,12 +318,12 @@ true
 <p>U ovom dijelu proći ćemo kroz osnove programskog jezika R. Obradit ćemo osnove njegove sintakse te tipove varijabli. Ovdje ćemo proći kroz neke jako bazične stvari. Većina “naprednijih” stvari provlačit će se kroz ostatak radionice.</p>
 <div id="osnovne-matematicke-operacije" class="section level1">
 <h1>Osnovne matematičke operacije</h1>
-<p>Za početak, pogledat ćemo kako možemo izvršavati jednostavne naredbe direktno u R konzoli.</p>
-<p>Kad god u R konzolu unesemo naredbu koju R smatra valjanom te pritisnemo <code>Enter</code> (također poznat kao <code>Return</code>), R će u konzoli izbaciti rezultat izvršavanja te naredbe. Na primjer, ako u konzolu unesemo <code>2 + 2</code>, R će izbaciti rezultat te operacije.</p>
-<pre class="r"><code>2 + 2</code></pre>
-<pre><code>## [1] 4</code></pre>
+<p>Za početak, pogledat ćemo kako možemo izvršavati jednostavne naredbe direktno u R konzoli. Kad god u R konzolu unesemo naredbu koju R smatra valjanom te pritisnemo <code>Enter</code> (također poznat kao <code>Return</code>), R će u konzoli izbaciti rezultat izvršavanja te naredbe. Na primjer, ako u konzolu unesemo <code>2 + 2</code>, R će izbaciti rezultat te operacije.</p>
+<pre class="r"><code>2 + 2
+## [1] 4</code></pre>
 <p>Isto možemo napraviti s dijeljenjem (<code>/</code>), množenjem (<code>*</code>), oduzimanjem (<code>-</code>) i potenciranjem (<code>^</code>).</p>
-<pre class="r"><code>4 / 2
+<pre class="r"><code>
+4 / 2
 ## [1] 2
 
 2 * 3
@@ -337,11 +337,12 @@ true
 <p>Poseban operator koji nekad zna biti koristan je <em>modulo</em> - <code>%%</code> - koji vraća cijelobrojni dio dijeljenja dvaju brojeva. Na primjer:</p>
 <pre class="r"><code># (Linije koje sadrže komentare započinju sa znakom #. R ne interpretira te linije.)
 # Obično dijeljenje:
-5 / 2</code></pre>
-<pre><code>## [1] 2.5</code></pre>
-<pre class="r"><code># Modulo
-5 %% 2</code></pre>
-<pre><code>## [1] 1</code></pre>
+5 / 2
+## [1] 2.5
+
+# Modulo
+5 %% 2
+## [1] 1</code></pre>
 <p>Naravno, kao i u pješačkoj matematici, i u R-u je potrebno paziti na grupiranje matematičkih izraza.</p>
 <p><code>x + y / z</code> je <span class="math inline">\(x + (y / z)\)</span> je <span class="math inline">\(x + \frac{z}{y}\)</span></p>
 <p><code>(x + y) / z</code> je <span class="math inline">\((x + y) / z\)</span> je <span class="math inline">\(\frac{x+y}{z}\)</span>.</p>
@@ -350,16 +351,17 @@ true
 <p>Sa samim matematičkim operacijama nećemo daleko doći. R ima i funkcije - operacije koje primaju parametre (eng. <em>argument</em>) i vraćaju neke vrijednosti.</p>
 <p>Funkcije u R-u imaju opći oblik <code>funkcija(argument1, argument2, ... , argumentN)</code>.</p>
 <p>Prva funkcija koju ćemo pogledati, a koja nadopunjava matematičke operacije s kojima smo započeli je <code>sqrt</code>, kojom možemo dobiti korijen nekog broja.</p>
-<pre class="r"><code>sqrt(4)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>sqrt(4)
+## [1] 2</code></pre>
 <p>Druga, koja se u R-u javlja <strong>jako</strong> često, je <code>c</code> (što je, prema Adleru [2012] skraćeno za <em>combine</em>). <code>c</code> uzima <span class="math inline">\(N\)</span> argumenata i spaja ih u <strong>vektor</strong>.</p>
 <pre class="r"><code># navodnici su bitni! ali mogu biti jednostruki ili dvostruki,
 # bitno je samo da je riječ omeđena jednakim parom
 # npr &#39;a&#39; je oke, &quot;a&#39; nije oke, ali zato &quot;a&quot; je
-print(c(&#39;patka&#39;, &quot;krava&quot;, &#39;pile&#39;, &quot;krumpir&quot;))</code></pre>
-<pre><code>## [1] &quot;patka&quot;   &quot;krava&quot;   &quot;pile&quot;    &quot;krumpir&quot;</code></pre>
-<pre class="r"><code>print(c(5, 4, 3, 2, 1))</code></pre>
-<pre><code>## [1] 5 4 3 2 1</code></pre>
+c(&#39;patka&#39;, &quot;krava&quot;, &#39;pile&#39;, &quot;krumpir&quot;)
+## [1] &quot;patka&quot;   &quot;krava&quot;   &quot;pile&quot;    &quot;krumpir&quot;
+
+c(5, 4, 3, 2, 1)
+## [1] 5 4 3 2 1</code></pre>
 <p>Koristeći <code>c</code>, stvorili smo dva vektora. Vektori spadaju među osnovne strukture podataka u R-u. Vektori mogu sadržavati proizvoljan broj elemenata <strong>istog tipa</strong>. O tipovima ćemo pričati malo kasnije.</p>
 <p>Sada ćemo se pozabaviti varijablama.</p>
 </div>
@@ -370,70 +372,81 @@ print(c(&#39;patka&#39;, &quot;krava&quot;, &#39;pile&#39;, &quot;krumpir&quot;)
 <p>Varijablu imenujemo (eng. <em>declare</em>) tako što neki poluproizvoljan naziv spojimo s nekom vrijednosti, koristeći operator <code>&lt;-</code>. Na pimjer:</p>
 <pre class="r"><code>a &lt;- 2</code></pre>
 <p>Ako sad u konzolu unesemo <code>a</code>, konzola će nam vratiti vrijednost te varijable. Isti rezultat dobili bismo ako bismo <code>a</code> iskoristili kao argument <code>print</code> funkcije (<code>print(a)</code>).</p>
-<pre class="r"><code>print(a)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>print(a)
+## [1] 2</code></pre>
 <p>Vrijednosti varijablama možemo pridavati (eng. <em>assign</em>) i koristeći znak <code>=</code> (razlikovati od <code>==</code>!), no to se <strong>ne preporučuje</strong>. Osim toga, vrijednosti možemo pridavati i s lijeva na desno, koristeći <code>-&gt;</code>:</p>
 <pre class="r"><code>3 -&gt; b
-b</code></pre>
-<pre><code>## [1] 3</code></pre>
+b
+## [1] 3</code></pre>
 <p>Imena varijabli mogu sadržavati slova, brojeve, točke (<code>.</code>) i underscoreove (čija hrvatska imena ne znam; <code>_</code>). Imena varijabli ne mogu započinjati s točkom koju prati broj. Na primjer:</p>
-<pre class="r"><code>.3 &lt;- 5</code></pre>
-<pre><code>## Error in 0.3 &lt;- 5: invalid (do_set) left-hand side to assignment</code></pre>
+<pre class="r"><code>
+.3 &lt;- 5
+## Error in 0.3 &lt;- 5: invalid (do_set) left-hand side to assignment</code></pre>
 <p>Također, imena varijabli ne mogu biti izrazi koji su rezervirani u samom programskom jeziku, kao što je <code>for</code> (koji se koristi za iniciranje petlji).</p>
-<pre class="r"><code>for &lt;- 5</code></pre>
-<pre><code>## Error: &lt;text&gt;:1:5: unexpected assignment
-## 1: for &lt;-
-##         ^</code></pre>
+<pre class="r"><code>
+for &lt;- 5
+## Error: &lt;text&gt;:2:5: unexpected assignment
+## 1: 
+## 2: for &lt;-
+##        ^</code></pre>
 <p>Funkcija koja zna biti zgodna kod imenovanja varijabli je <code>exists</code>, koja kao argument prima izraz u navodnicima (što je poznato kao <strong>string</strong>) te vraća <code>TRUE</code> ili <code>FALSE</code> ovisno o tom je li objekt istog imena pronađen ili ne.</p>
 <pre class="r"><code># varijabla koju smo ranije stvorili
-exists(&#39;a&#39;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code># ključna riječ, definirana u R-u, ne smijemo koristiti
-exists(&#39;for&#39;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code># ključna riječ, definirana u R-u, ne smijemo koristiti
-exists(&#39;if&#39;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code># ime koje nije iskorišteno
-exists(&#39;maca&#39;)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+exists(&#39;a&#39;)
+## [1] TRUE
+
+# ključna riječ, definirana u R-u, ne smijemo koristiti
+exists(&#39;for&#39;)
+## [1] TRUE
+
+# ključna riječ, definirana u R-u, ne smijemo koristiti
+exists(&#39;if&#39;)
+## [1] TRUE
+
+# ime koje nije iskorišteno
+exists(&#39;maca&#39;)
+## [1] FALSE</code></pre>
 <p>Sad kad znamo kako varijablama pripisati vrijednosti, možemo spremiti vektore koje smo ranije napravili koristeći <code>c</code>. Neovisno o tome što <em>možemo</em> koristiti svašta za imena varijabli, trebali bismo se truditi imena učiniti smislenima. Dugoročno, to će nas poštedjeti puno mentalnog (a nekad i R-ovskog) napora. Također, savjetovao bih da izbjegavate korištenje “hrvatskih” znakova (č, ć, ž, š, đ) u svom kodu; korištenje tih znakova može izazvati snažne glavobolje.</p>
 <pre class="r"><code>domace_zivotinje_i_krumpir &lt;- c(&#39;patka&#39;, &#39;krava&#39;, &#39;pile&#39;, &#39;krumpir&#39;)
 
 brojevi.5.do.1 &lt;- c(5, 4, 3, 2, 1)</code></pre>
 <p>Kao i kad smo varijabli <code>a</code> pripisali vrijednost <code>2</code>, ni sada ne dobivamo nikakav output u konzoli. Ali možemo koristiti <code>print</code> ili samo upisati ime varijable u konzolu kako bismo dobili njenu vrijednost.</p>
-<pre class="r"><code>domace_zivotinje_i_krumpir</code></pre>
-<pre><code>## [1] &quot;patka&quot;   &quot;krava&quot;   &quot;pile&quot;    &quot;krumpir&quot;</code></pre>
-<pre class="r"><code>brojevi.5.do.1</code></pre>
-<pre><code>## [1] 5 4 3 2 1</code></pre>
+<pre class="r"><code>domace_zivotinje_i_krumpir
+## [1] &quot;patka&quot;   &quot;krava&quot;   &quot;pile&quot;    &quot;krumpir&quot;
+
+brojevi.5.do.1
+## [1] 5 4 3 2 1</code></pre>
 <p>Sad kad smo svoje vektore pripisali varijablama, možemo dohvaćati pojedine vrijednosti iz njih. Na primjer, ako želimo dohvatiti prvu vrijednost iz vektora <code>domace_zivotinje_i_krumpir</code>, možemo učiniti ovo:</p>
-<pre class="r"><code>domace_zivotinje_i_krumpir[1]</code></pre>
-<pre><code>## [1] &quot;patka&quot;</code></pre>
+<pre class="r"><code>domace_zivotinje_i_krumpir[1]
+## [1] &quot;patka&quot;</code></pre>
 <p><code>1</code> je, u ovom slučaju, <strong>indeks</strong>. U R-u, za razliku od većine drugih programskih jezika, indeksiranje započinje s <code>1</code>, a ne s <code>0</code>. Za dohvaćanje trećeg elementa iz vektora <code>brojevi.5.do.1</code> izvršili bismo:</p>
-<pre class="r"><code>brojevi.5.do.1[3]</code></pre>
-<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>brojevi.5.do.1[3]
+## [1] 3</code></pre>
 <p>Zadnji element možemo dohvatiti pomoću funkcije <code>length</code>, koja vraća duljinu vektora, tj. broj elemenata koji se u njemu nalaze. Na primjer:</p>
-<pre class="r"><code>length(domace_zivotinje_i_krumpir)</code></pre>
-<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>length(domace_zivotinje_i_krumpir)
+## [1] 4</code></pre>
 <p>Budući da broj elemenata ujedno označava i posljednji element, možemo učiniti sljedeće:</p>
 <pre class="r"><code># dohvaćanje pomoću indeksa
-domace_zivotinje_i_krumpir[4]</code></pre>
-<pre><code>## [1] &quot;krumpir&quot;</code></pre>
-<pre class="r"><code># dohvacanje pomocu funkcije length()
-domace_zivotinje_i_krumpir[length(domace_zivotinje_i_krumpir)]</code></pre>
-<pre><code>## [1] &quot;krumpir&quot;</code></pre>
-<pre class="r"><code># iskoristit ćemo priliku i pokazati kako možemo usporediti dvije vrijednosti
+domace_zivotinje_i_krumpir[4]
+## [1] &quot;krumpir&quot;
+
+# dohvacanje pomocu funkcije length()
+domace_zivotinje_i_krumpir[length(domace_zivotinje_i_krumpir)]
+## [1] &quot;krumpir&quot;
+
+# iskoristit ćemo priliku i pokazati kako možemo usporediti dvije vrijednosti
 domace_zivotinje_i_krumpir[4] ==
-    domace_zivotinje_i_krumpir[length(domace_zivotinje_i_krumpir)]</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+    domace_zivotinje_i_krumpir[length(domace_zivotinje_i_krumpir)]
+## [1] TRUE</code></pre>
 <p>Ovo funkcionira jer evaluiranje, odnosno izvršavanje koda <code>length(domace_zivotinje_i_krumpir)</code> kao rezultat vraća brojku <code>4</code>.</p>
 <p>Također, vidjeli smo da možemo koristiti <code>==</code> kako bismo provjerili jesu li dva objekta, odnosno dvije varijable jednake. Na primjer</p>
-<pre class="r"><code>2 + 2 == 4</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>4 == 4</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>4 == 5</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>2 + 2 == 4
+## [1] TRUE
+
+4 == 4
+## [1] TRUE
+
+4 == 5
+## [1] FALSE</code></pre>
 <p>Treba voditi računa o tome da su <code>==</code> i <code>=</code> <strong>vrlo različiti</strong>!</p>
 <div id="tipovi-varijabli" class="section level3">
 <h3>Tipovi varijabli</h3>
@@ -446,68 +459,79 @@ domace_zivotinje_i_krumpir[4] ==
 </ul>
 <p>Pogledat ćemo nekoliko primjera ovih tipova, te vidjeti kako možemo provjeriti kojeg je neka varijabla ili vrijednost tipa.</p>
 <pre class="r"><code># character
-&#39;susjed&#39;</code></pre>
-<pre><code>## [1] &quot;susjed&quot;</code></pre>
-<pre class="r"><code># da bismo provjerili je li neka vrijednost character, koristimo is.character()
-is.character(&#39;susjed&#39;)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.character(domace_zivotinje_i_krumpir[4])</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.character(1)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+&#39;susjed&#39;
+## [1] &quot;susjed&quot;
+
+# da bismo provjerili je li neka vrijednost character, koristimo is.character()
+is.character(&#39;susjed&#39;)
+## [1] TRUE
+is.character(domace_zivotinje_i_krumpir[4])
+## [1] TRUE
+is.character(1)
+## [1] FALSE</code></pre>
 <p>Kod <code>integer</code> i <code>numeric</code> tipova postoje neke specifičnosti.</p>
 <pre class="r"><code># integer
-1</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code># za provjeravanje koristimo is.integer()
-is.integer(1)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+1
+## [1] 1
+
+# za provjeravanje koristimo is.integer()
+is.integer(1)
+## [1] FALSE</code></pre>
 <p>Pozivanje funkcije <code>is.integer()</code> s vrijednosti <code>1</code> vraća <code>FALSE</code>. To je zato jer R brojeve automatski sprema kao <code>numeric</code>.</p>
 <pre class="r"><code># za provjeravanje je li objekt numeric koristimo is.numeric()
-is.numeric(1)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+is.numeric(1)
+## [1] TRUE</code></pre>
 <p>Kako bismo natjerali R da nam da <code>integer</code> vrijednost, možemo staviti <code>L</code> na kraj broja:</p>
-<pre class="r"><code>is.integer(1L)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.integer(1L)
+## [1] TRUE</code></pre>
 <p>Ovo je zgodno znati jer se može dogoditi da funkcija traži <code>integer</code>, ali odbija prihvatiti (recimo) <code>5</code> kao odgovarajuću vrijednost.</p>
 <pre class="r"><code># na kraju, numeric
-is.numeric(1.5115)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+is.numeric(1.5115)
+## [1] TRUE</code></pre>
 <p>Za pisanje decimalnih brojeva <strong>moramo koristiti točku</strong>.</p>
-<pre class="r"><code>is.numeric(1,4141)</code></pre>
-<pre><code>## Error in is.numeric(1, 4141): 2 arguments passed to &#39;is.numeric&#39; which requires 1</code></pre>
-<pre class="r"><code>1,5151 + 1</code></pre>
-<pre><code>## Error: &lt;text&gt;:1:2: unexpected &#39;,&#39;
-## 1: 1,
-##      ^</code></pre>
+<pre class="r"><code>
+is.numeric(1,4141)
+
+1,5151 + 1
+## Error: &lt;text&gt;:4:2: unexpected &#39;,&#39;
+## 3: 
+## 4: 1,
+##     ^</code></pre>
 <p>Posljednji tip je <code>logical</code>:</p>
-<pre class="r"><code>TRUE == T</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>FALSE == F</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.logical(TRUE)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.logical(F)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>TRUE == T
+## [1] TRUE
+FALSE == F
+## [1] TRUE
+
+is.logical(TRUE)
+## [1] TRUE
+
+is.logical(F)
+## [1] TRUE</code></pre>
 <p>Za kraj, pogledat ćemo output različitih <code>is.</code> funkcija kad im damo razičite vrijednosti.</p>
-<pre class="r"><code>is.logical(1)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>is.numeric(1L)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.character(02918)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>is.integer(151518)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.logical(1)
+## [1] FALSE
+
+is.numeric(1L)
+## [1] TRUE
+
+is.character(02918)
+## [1] FALSE
+
+is.integer(151518)
+## [1] FALSE</code></pre>
 <p>Primjećujemo da se <code>1L</code> tretira i kao <code>numeric</code> tip.</p>
-<pre class="r"><code>is.integer(1L)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>is.numeric(1L)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.integer(1L)
+## [1] TRUE
+
+is.numeric(1L)
+## [1] TRUE</code></pre>
 <p>Isto ne vrijedi za, na primjer, <code>5.911</code>:</p>
-<pre class="r"><code>is.integer(5.911)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>is.numeric(5.911)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.integer(5.911)
+## [1] FALSE
+
+is.numeric(5.911)
+## [1] TRUE</code></pre>
 <p>Nakon upoznavanja s osnovnim tipovima vrijednosti i varijabli, pogledat ćemo osnovne strukture podataka.</p>
 </div>
 </div>
@@ -516,39 +540,42 @@ is.numeric(1.5115)</code></pre>
 <p>Strukture podataka su formati organiziranja, upravljanja i spremanja podataka koji omogućuju efikasno pristupanje podacima i njihovo modificiranje (<a href="https://en.wikipedia.org/wiki/Data_structure" class="uri">https://en.wikipedia.org/wiki/Data_structure</a>).</p>
 <p>Već smo se upoznali s jednim tipom strukture podataka u R-u, a to je vektor. R ima nekoliko osnovnih struktura podataka. Ovdje ćemo proći kroz one koje se najčešće javljaju.</p>
 <p>Za ponavljanje, stvorit ćemo novi vektor:</p>
-<pre class="r"><code>c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;)</code></pre>
-<pre><code>## [1] &quot;vektor&quot;   &quot;od&quot;       &quot;4&quot;        &quot;elementa&quot;</code></pre>
-<pre class="r"><code># možemo provjeriti je li neki objekt vektor koristeći is.vector
-is.vector(c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;))</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code># funkcije za provjeravanje tipova varijabli možemo primijeniti i na vektore
-is.character(c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;))</code></pre>
-<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;)
+## [1] &quot;vektor&quot;   &quot;od&quot;       &quot;4&quot;        &quot;elementa&quot;
+
+# možemo provjeriti je li neki objekt vektor koristeći is.vector
+is.vector(c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;))
+## [1] TRUE
+
+# funkcije za provjeravanje tipova varijabli možemo primijeniti i na vektore
+is.character(c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;))
+## [1] TRUE</code></pre>
 <div id="data.frame" class="section level3">
 <h3>data.frame</h3>
 <p><code>data.frame</code> je vjerojatno najvažnija osnovna struktura (ili barem ona s kojom ćete se najčešće družiti). On odgovara onom što možemo vidjeti u <em>Data viewu</em> SPSS-a - sastoji se od redova koji predstavljaju opažanja/sudionike/caseove i stupaca koji predstavljaju varijable. Može sadržavati varijable koje su različitih tipova (za razliku od nekih drugih struktura, koje žele gledati samo jedan tip podataka).</p>
 <p><code>data.frame</code> možemo stvoriti koristeći istoimenu funkciju:</p>
-<pre class="r"><code>print(data.frame(&#39;brojke&#39; = c(1, 2, 3, 4, 5),
+<pre class="r"><code>data.frame(&#39;brojke&#39; = c(1, 2, 3, 4, 5),
                  &#39;slova&#39; = c(&#39;a&#39;, &#39;b&#39;, &#39;de&#39;, &#39;ce&#39;, &#39;fe&#39;),
-                 &#39;logike&#39;= c(F, F, T, T, F)))</code></pre>
-<pre><code>##   brojke slova logike
+                 &#39;logike&#39;= c(F, F, T, T, F))
+##   brojke slova logike
 ## 1      1     a  FALSE
 ## 2      2     b  FALSE
 ## 3      3    de   TRUE
 ## 4      4    ce   TRUE
 ## 5      5    fe  FALSE</code></pre>
 <p>Pri stvaranju novog <code>data.framea</code>, svi redovi moraju imati vrijednosti na svim stupcima jer će se R inače požaliti.</p>
-<pre class="r"><code>data.frame(&#39;brojke&#39; = c(1, 2, 3, 4, 5),
+<pre class="r"><code>
+data.frame(&#39;brojke&#39; = c(1, 2, 3, 4, 5),
            &#39;slova&#39; = c(&#39;a&#39;, &#39;b&#39;, &#39;de&#39;, &#39;ce&#39;, &#39;fe&#39;),
            # maknuli smo zadnjji element (F) iz stupca &#39;logike&#39;
-           &#39;logike&#39;= c(F, F, T, T))</code></pre>
-<pre><code>## Error in data.frame(brojke = c(1, 2, 3, 4, 5), slova = c(&quot;a&quot;, &quot;b&quot;, &quot;de&quot;, : arguments imply differing number of rows: 5, 4</code></pre>
+           &#39;logike&#39;= c(F, F, T, T))
+## Error in data.frame(brojke = c(1, 2, 3, 4, 5), slova = c(&quot;a&quot;, &quot;b&quot;, &quot;de&quot;, : arguments imply differing number of rows: 5, 4</code></pre>
 <p>Tome možemo doskočiti tako što ćemo eksplicitno neku vrijednost proglasiti nedostajućom, što činimo pomoću posebne vrijednosti <code>NA</code>:</p>
 <pre class="r"><code>data.frame(&#39;brojke&#39; = c(1, 2, 3, 4, 5),
            &#39;slova&#39; = c(&#39;a&#39;, &#39;b&#39;, &#39;de&#39;, &#39;ce&#39;, &#39;fe&#39;),
            # umjesto posljednjeg elementa u stupcu &#39;logike&#39; stavili smo NA
-           &#39;logike&#39;= c(F, F, T, T, NA))</code></pre>
-<pre><code>##   brojke slova logike
+           &#39;logike&#39;= c(F, F, T, T, NA))
+##   brojke slova logike
 ## 1      1     a  FALSE
 ## 2      2     b  FALSE
 ## 3      3    de   TRUE
@@ -564,8 +591,8 @@ is.character(c(&#39;vektor&#39;, &#39;od&#39;, &#39;4&#39;, &#39;elementa&#39;))
                &#39;slova&#39; = letters[1:15],
                &#39;logike&#39;= c(F, F, T, T, NA))
 
-brojke_i_slova</code></pre>
-<pre><code>##    brojke slova logike
+brojke_i_slova
+##    brojke slova logike
 ## 1       1     a  FALSE
 ## 2       2     b  FALSE
 ## 3       3     c   TRUE
@@ -584,23 +611,24 @@ brojke_i_slova</code></pre>
 <p>Primjećujemo da se vrijednosti iz stupca <code>logike</code> ponavljaju. To funkcionira zato što je broj redova <code>data.framea</code> djeljiv s brojem elemenata koje smo stavili u vektor <code>logike</code> pri definiranju <code>data.framea</code> (imamo 15 redova, a vektor <code>logike</code> ima 5 elemenata). Sad kad smo proširili <code>brojke_i_slova</code>, pogledat ćemo kako možemo pristupati vrijednostima u <code>data.frameu</code>.</p>
 <p>Elementima možemo pristupati korištenjem uglatih zagrada, kao i kod vektora. Pritom treba imati na umu da je <code>data.frame</code> <strong>dvodimenzionalni objekt</strong>, zbog čega traži <strong>dva indeksa</strong> odvojena zarezom - <strong>prvi</strong> se odnosi na <strong>redove</strong>, a <strong>drugi</strong> na <strong>stupce</strong>. Ako jedan od indeksa izostavimo, ali stavimo zarez, R će vratiti sve elemente na odgovarajućem mjestu, odnosno vratit će sve redove ako izostavimo prvi indeks i sve stupce ako izostavimo drugi indeks.</p>
 <pre class="r"><code># svi stupci prvog  reda
-brojke_i_slova[1, ]</code></pre>
-<pre><code>##   brojke slova logike
-## 1      1     a  FALSE</code></pre>
-<pre class="r"><code># svi redovi prvog stupca
-brojke_i_slova[, 1]</code></pre>
-<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15</code></pre>
+brojke_i_slova[1, ]
+##   brojke slova logike
+## 1      1     a  FALSE
+
+# svi redovi prvog stupca
+brojke_i_slova[, 1]
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15</code></pre>
 <p>Ovdje također možemo koristiti <code>n:m</code> sintaksu za dohvaćanje raspona vrijednosti. Na primjer, da bismo dohvatili prva tri reda i sve stupce <code>brojki_i_slova</code>, napravili bismo sljedeće:</p>
 <pre class="r"><code># prva tri reda, svi stupci
-brojke_i_slova[1:3, ]</code></pre>
-<pre><code>##   brojke slova logike
+brojke_i_slova[1:3, ]
+##   brojke slova logike
 ## 1      1     a  FALSE
 ## 2      2     b  FALSE
 ## 3      3     c   TRUE</code></pre>
 <p>Za dohvaćanje vrijednosti koje nisu uzastopne, možemo koristiti funkciju <code>c</code>, koju također možemo kombinirati s <code>n:m</code> sintaksom:</p>
 <pre class="r"><code># prva tri reda i redovi 7 do 12, te stupci 1 i 3
-brojke_i_slova[c(1:3, 7:12), c(1, 3)]</code></pre>
-<pre><code>##    brojke logike
+brojke_i_slova[c(1:3, 7:12), c(1, 3)]
+##    brojke logike
 ## 1       1  FALSE
 ## 2       2  FALSE
 ## 3       3   TRUE
@@ -611,46 +639,237 @@ brojke_i_slova[c(1:3, 7:12), c(1, 3)]</code></pre>
 ## 11     11  FALSE
 ## 12     12  FALSE</code></pre>
 <p>Stupcima možemo pristupati i pomoću njihovih imena:</p>
-<pre class="r"><code>brojke_i_slova[1:3, c(&#39;logike&#39;, &#39;brojke&#39;)]</code></pre>
-<pre><code>##   logike brojke
+<pre class="r"><code>brojke_i_slova[1:3, c(&#39;logike&#39;, &#39;brojke&#39;)]
+##   logike brojke
 ## 1  FALSE      1
 ## 2  FALSE      2
 ## 3   TRUE      3</code></pre>
 <p>Naposljetku, <strong>jednom</strong> određenom stupcu možemo pristupiti koristeći <code>$</code> operator:</p>
-<pre class="r"><code>brojke_i_slova$logike</code></pre>
-<pre><code>##  [1] FALSE FALSE  TRUE  TRUE    NA FALSE FALSE  TRUE  TRUE    NA FALSE
+<pre class="r"><code>brojke_i_slova$logike
+##  [1] FALSE FALSE  TRUE  TRUE    NA FALSE FALSE  TRUE  TRUE    NA FALSE
 ## [12] FALSE  TRUE  TRUE    NA</code></pre>
 <p>Prije nego što prijeđemo na sljedeću strukturu podataka, upoznat ćemo se s funkcijom <code>str</code> (structure). To je funkcija koja kao input prima neki objekt i vraća prikaz njegove strukture. Primjerice, možemo pogledati kakva je struktura našeg <code>data.framea</code> <code>brojke_i_slova</code>.</p>
-<pre class="r"><code>str(brojke_i_slova)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    15 obs. of  3 variables:
+<pre class="r"><code>str(brojke_i_slova)
+## &#39;data.frame&#39;:    15 obs. of  3 variables:
 ##  $ brojke: int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ slova : Factor w/ 15 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##  $ logike: logi  FALSE FALSE TRUE TRUE NA FALSE ...</code></pre>
 <p>R nas informira da je <code>brojke_i_slova</code> objekt tipa <code>data.frame</code> te da sadrži 15 redova (<code>15 obs.</code>) i 3 varijable. Uz svaku varijablu naveden je njen tip te je prikazano prvih nekoliko elemenata. Vidimo da R varijablu <code>slova</code> tretira kao <code>Factor</code>, a ne kao <code>character</code>.</p>
 <p><code>factor</code> je tip koji R koristi za reprezentiranje kategoričkih varijabli. <code>factor</code> možemo stvoriti pozivanjem istoimene funkcije:</p>
-<pre class="r"><code>print(factor(c(&#39;pas&#39;, &#39;mačka&#39;, &#39;mačka&#39;, &#39;pas&#39;, &#39;pas&#39;)))</code></pre>
-<pre><code>## [1] pas   mačka mačka pas   pas  
+<pre class="r"><code>factor(c(&#39;pas&#39;, &#39;mačka&#39;, &#39;mačka&#39;, &#39;pas&#39;, &#39;pas&#39;))
+## [1] pas   mačka mačka pas   pas  
 ## Levels: mačka pas</code></pre>
 <p>Ispod sadržaja ovog vektora navedene su razine koje on može poprimiti (<code>levels</code>). Razine možemo dohvatiti i pozivom funkcije <code>levels</code>:</p>
 <pre class="r"><code>zvijeri &lt;- factor(c(&#39;pas&#39;, &#39;mačka&#39;, &#39;mačka&#39;, &#39;pas&#39;, &#39;pas&#39;))
-levels(zvijeri)</code></pre>
-<pre><code>## [1] &quot;mačka&quot; &quot;pas&quot;</code></pre>
-<pre class="r"><code>str(zvijeri)</code></pre>
-<pre><code>##  Factor w/ 2 levels &quot;mačka&quot;,&quot;pas&quot;: 2 1 1 2 2</code></pre>
+levels(zvijeri)
+## [1] &quot;mačka&quot; &quot;pas&quot;
+str(zvijeri)
+##  Factor w/ 2 levels &quot;mačka&quot;,&quot;pas&quot;: 2 1 1 2 2</code></pre>
 <p>Faktori se koriste i za reprezentiranje rangiranih podatka. U tom slučaju potrebno je funkciji <code>factor</code> dodati argument <code>ordered</code> i dati mu vrijednost <code>TRUE</code>. Osim toga, potrebno je eksplicirati koji je redoslijed razina.</p>
 <pre class="r"><code>prihodi &lt;- factor(c(&#39;srednji&#39;, &#39;niski&#39;, &#39;visoki&#39;, &#39;visoki&#39;, &#39;srednji&#39;),
                   ordered = T, levels = c(&#39;visoki&#39;, &#39;srednji&#39;, &#39;niski&#39;))
-print(prihodi)</code></pre>
-<pre><code>## [1] srednji niski   visoki  visoki  srednji
-## Levels: visoki &lt; srednji &lt; niski</code></pre>
-<pre class="r"><code>str(prihodi)</code></pre>
-<pre><code>##  Ord.factor w/ 3 levels &quot;visoki&quot;&lt;&quot;srednji&quot;&lt;..: 2 3 1 1 2</code></pre>
-<p>Sad kad smo se upoznali s faktorima, prijeći ćemo na liste.</p>
+prihodi
+## [1] srednji niski   visoki  visoki  srednji
+## Levels: visoki &lt; srednji &lt; niski
+str(prihodi)
+##  Ord.factor w/ 3 levels &quot;visoki&quot;&lt;&quot;srednji&quot;&lt;..: 2 3 1 1 2</code></pre>
+<p>U kodu gore, <code>ordered</code> i <code>levels</code> su imenovani (named) argumenti. Imenovani argumenti se razlikuju od pozicijskih (eng. <em>positional</em>) po tome što nije bitno kojim ih redoslijedom postavljamo. Isti efekt dobili bismo da smo prvo napisali <code>levels</code>, a potom <code>ordered</code>.</p>
+<p>Nekad se možemo izvući bez da argumente imenujemo, ali nekad će R baciti error, tako da tu razliku treba imati na umu. Sad kad smo se upoznali s faktorima, prijeći ćemo na liste.</p>
 </div>
 <div id="list" class="section level3">
 <h3>list</h3>
+<p>Lista je uređeni skup elemenata. Listu možemo definirati koristeći funkciju <code>list</code>:</p>
+<pre class="r"><code>list(&#39;franz&#39;, &#39;liszt&#39;)
+## [[1]]
+## [1] &quot;franz&quot;
+## 
+## [[2]]
+## [1] &quot;liszt&quot;</code></pre>
+<p>Objekti u listi ne moraju biti istog tipa. Na primjer, možemo napraviti listu koja sadrži jedan <code>character</code>, jedan <code>integer</code> i jedan <code>numeric</code>.</p>
+<pre class="r"><code>spisak &lt;- list(&#39;franz&#39;, 1L, 3.14)
+spisak
+## [[1]]
+## [1] &quot;franz&quot;
+## 
+## [[2]]
+## [1] 1
+## 
+## [[3]]
+## [1] 3.14</code></pre>
+<p>Brojevi u dvostrukim uglatim zagradama (<code>[[n]]</code>) daju nam do znanja da lista ima 3 elementa. To možemo potvrditi pozivom funkcije <code>str</code> na <code>spisku</code>.</p>
+<pre class="r"><code>str(spisak)
+## List of 3
+##  $ : chr &quot;franz&quot;
+##  $ : int 1
+##  $ : num 3.14</code></pre>
+<p>Ovdje vidimo i da <code>spisak</code> sadrži elemente različitih tipova. Liste možemo puniti raznolikim objektima, čak i drugim listama.</p>
+<pre class="r"><code>raznoliki_objekti &lt;- list(# pojedine elemente listi možemo i imenovati
+    imena = c(&#39;Ramiro&#39;, &#39;Zorro&#39;, &#39;Vladimir&#39;),
+    brojevi = c(3.61, 4.15, 7.151, 20:25),
+    inception = list(glumci = c(&#39;Leonardo di Caprio&#39;, &#39;ostali&#39;),
+                     broj_kamera = 5))
+
+str(raznoliki_objekti)
+## List of 3
+##  $ imena    : chr [1:3] &quot;Ramiro&quot; &quot;Zorro&quot; &quot;Vladimir&quot;
+##  $ brojevi  : num [1:9] 3.61 4.15 7.15 20 21 ...
+##  $ inception:List of 2
+##   ..$ glumci     : chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+##   ..$ broj_kamera: num 5</code></pre>
+<p>Imenovanim elementima listi možemo pristupati isto kao i stupcima <code>data.framea</code>:</p>
+<pre class="r"><code>raznoliki_objekti$imena
+## [1] &quot;Ramiro&quot;   &quot;Zorro&quot;    &quot;Vladimir&quot;
+
+raznoliki_objekti[2]
+## $brojevi
+## [1]  3.610  4.150  7.151 20.000 21.000 22.000 23.000 24.000 25.000</code></pre>
+<p>Također, možemo dohvatiti više elemenata odjednom.</p>
+<pre class="r"><code>raznoliki_objekti[c(&#39;imena&#39;, &#39;brojevi&#39;)]
+## $imena
+## [1] &quot;Ramiro&quot;   &quot;Zorro&quot;    &quot;Vladimir&quot;
+## 
+## $brojevi
+## [1]  3.610  4.150  7.151 20.000 21.000 22.000 23.000 24.000 25.000
+
+raznoliki_objekti[2:3]
+## $brojevi
+## [1]  3.610  4.150  7.151 20.000 21.000 22.000 23.000 24.000 25.000
+## 
+## $inception
+## $inception$glumci
+## [1] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;            
+## 
+## $inception$broj_kamera
+## [1] 5</code></pre>
+<p>Kad imamo ugniježđene (eng. <em>nested</em>) strukture, možemo ulančavati operatore za dohvaćanje kako bismo ušli dublje u strukture.</p>
+<pre class="r"><code>raznoliki_objekti$inception$glumci
+## [1] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+
+raznoliki_objekti[&#39;inception&#39;][&#39;broj_kamera&#39;]
+## $&lt;NA&gt;
+## NULL</code></pre>
+<p>Posljednji komad koda nije vratio rezultat koji smo očekivali (vrijednost koja je spremljena u <code>broj_kamera</code> je 5). Kad pogledamo output koji daje <code>str</code>, vidimo da <code>raznoliki_objekti[&#39;inception&#39;]</code> vraća listu koja ima jedan element, koji je lista koja ima dva elementa.</p>
+<pre class="r"><code>str(raznoliki_objekti[&#39;inception&#39;])
+## List of 1
+##  $ inception:List of 2
+##   ..$ glumci     : chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+##   ..$ broj_kamera: num 5</code></pre>
+<p>Kako bismo došli do broja kamera, možemo učiniti sljedeće:</p>
+<pre class="r"><code>raznoliki_objekti[&#39;inception&#39;]$inception$broj_kamera
+## [1] 5</code></pre>
+<p>Do ove zavrzlame dolazi zbog operatora <code>[]</code>, koji vraća listu kad je primijenjen na listi. Ako želimo vratiti samo objekt koji se nalazi pod imenom <code>inception</code>, možemo koristiti operator <code>[[]]</code>.</p>
+<pre class="r"><code>str(raznoliki_objekti[[&#39;inception&#39;]])
+## List of 2
+##  $ glumci     : chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+##  $ broj_kamera: num 5</code></pre>
+<p>Sada dobivamo listu (umjesto liste lista), te možemo direktno dohvatiti broj kamera na bilo koji od dosad spomenutih načina. Učinit ćemo to te se pritom osvrnuti na ishode različitih metoda dohvaćanja.</p>
+<pre class="r"><code>str(raznoliki_objekti[[&#39;inception&#39;]]$broj_kamera)
+##  num 5
+
+str(raznoliki_objekti[[&#39;inception&#39;]][&#39;broj_kamera&#39;])
+## List of 1
+##  $ broj_kamera: num 5
+
+str(raznoliki_objekti[[&#39;inception&#39;]][[&#39;broj_kamera&#39;]])
+##  num 5
+
+str(raznoliki_objekti$inception$broj_kamera)
+##  num 5</code></pre>
+<p>Pogledat ćemo kako se ovi operatori ponašaju na varijabli <code>glumci</code>, koja sadrži 2 elementa.</p>
+<pre class="r"><code>str(raznoliki_objekti[[&#39;inception&#39;]]$glumci)
+##  chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+
+str(raznoliki_objekti[[&#39;inception&#39;]][&#39;glumci&#39;])
+## List of 1
+##  $ glumci: chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+
+str(raznoliki_objekti[[&#39;inception&#39;]][[&#39;glumci&#39;]][1])
+##  chr &quot;Leonardo di Caprio&quot;
+
+str(raznoliki_objekti$inception$glumci[[2]])
+##  chr &quot;ostali&quot;</code></pre>
+<p>Kao što možemo vidjeti, razlika između <code>[[]]</code> i <code>[]</code> gubi se kad se spustimo na najnižu razinu, tj. na dohvaćanje pojedinih elemenata vektora <code>glumci</code>.</p>
+<p>Osim što vraćaju različite objekte, <code>[[]]</code> i <code>[]</code> razlikuju se u sljedećem:</p>
+<ul>
+<li><code>[]</code> može dohvaćati više elemenata (npr. [1:5]), a <code>[[]]</code> samo jedan</li>
+<li><code>[[]]</code> može baratati parcijalnim imenima ako se argumentu <code>exact</code> da vrijednost <code>FALSE</code>, a <code>[]</code> nema tu mogućnost</li>
+</ul>
+<pre class="r"><code>
+str(raznoliki_objekti[[&#39;ince&#39;, exact = F]])
+## List of 2
+##  $ glumci     : chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+##  $ broj_kamera: num 5
+
+str(raznoliki_objekti)
+## List of 3
+##  $ imena    : chr [1:3] &quot;Ramiro&quot; &quot;Zorro&quot; &quot;Vladimir&quot;
+##  $ brojevi  : num [1:9] 3.61 4.15 7.15 20 21 ...
+##  $ inception:List of 2
+##   ..$ glumci     : chr [1:2] &quot;Leonardo di Caprio&quot; &quot;ostali&quot;
+##   ..$ broj_kamera: num 5
+
+# nije ono što bismo očekivali
+str(raznoliki_objekti[[1:2]])
+##  chr &quot;Zorro&quot;
+
+str(raznoliki_objekti[&#39;ince&#39;, exact = F])
+## Error in raznoliki_objekti[&quot;ince&quot;, exact = F]: incorrect number of dimensions</code></pre>
+<p>Ovu ponešto supitlnu i prepredenu razliku se isplati imati a umu jer različite funkcije očekuju različite inpute, a lako im je nesvjesno gurati nešto što ne žele (na primjer listu umjesto <code>data.framea</code> koji se nalazi u listi).</p>
+<p>Posljednja struktura koju ćemo pogledati je matrica.</p>
+</div>
+<div id="matrix" class="section level3">
+<h3>matrix</h3>
+<p>Matrica je 2D objekt koji sadrži elemente istog tipa. Možemo je stvoriti koristeći funkciju <code>matrix</code>.</p>
+<pre class="r"><code>postava &lt;- matrix(c(&#39;Neo&#39;, 150, &#39;Morpheus&#39;, 165, &#39;Agent Smith&#39;, 140),
+                  # broj redova i stupaca matrice
+                  nrow = 3, ncol = 2,
+                  # trebaju li se podaci upisivati red po red ili stupac po stupac
+                  # default je F
+                  byrow = T)
+postava
+##      [,1]          [,2] 
+## [1,] &quot;Neo&quot;         &quot;150&quot;
+## [2,] &quot;Morpheus&quot;    &quot;165&quot;
+## [3,] &quot;Agent Smith&quot; &quot;140&quot;</code></pre>
+<p>Dimenzije matrice možemo dohvatiti funkcijom <code>dim</code>, koja je primijenjiva i na <code>data.frame</code> (ali ne i na liste).</p>
+<pre class="r"><code>dim(postava)
+## [1] 3 2</code></pre>
+<p>Redovima i stupcima matrica možemo dati imena, radi lakšeg orijentiranja:</p>
+<pre class="r"><code>dimnames(postava) &lt;- list(
+    # imena redova
+    c(&#39;lepi&#39;, &#39;pametni&#39;, &#39;zli&#39;),
+    # imena stupaca
+    c(&#39;ime&#39;, &#39;visina&#39;))
+postava
+##         ime           visina
+## lepi    &quot;Neo&quot;         &quot;150&quot; 
+## pametni &quot;Morpheus&quot;    &quot;165&quot; 
+## zli     &quot;Agent Smith&quot; &quot;140&quot;</code></pre>
+<p>Imena redova možemo dohvatiti funkcijom <code>rownames</code>, a imena stupaca funkcijom <code>colnames</code>.</p>
+<pre class="r"><code>rownames(postava)
+## [1] &quot;lepi&quot;    &quot;pametni&quot; &quot;zli&quot;
+
+colnames(postava)
+## [1] &quot;ime&quot;    &quot;visina&quot;</code></pre>
+<p>Iste funkcije možemo koristiti i na <code>data.frameu</code>, pri čemu je kod njih na raspolaganju i funkcija <code>names</code>.</p>
+<pre class="r"><code>names(brojke_i_slova)
+## [1] &quot;brojke&quot; &quot;slova&quot;  &quot;logike&quot;
+
+# također, liste
+
+names(raznoliki_objekti)
+## [1] &quot;imena&quot;     &quot;brojevi&quot;   &quot;inception&quot;</code></pre>
+<p>Elementima možemo pristupati pomoću <code>[]</code> operatora (po istom principu kao i kod <code>data.framea</code>), ali ne i pomoću <code>$</code> operatora.</p>
+<pre class="r"><code>postava[2:3, &#39;ime&#39;]
+##       pametni           zli 
+##    &quot;Morpheus&quot; &quot;Agent Smith&quot;</code></pre>
+<p>Ovime ćemo završiti uvod u R te se baciti na pripremu podataka za obradu.</p>
 </div>
 </div>
+</div>
+<div id="reference" class="section level1">
+<h1>Reference</h1>
+<p>Adler, J. (2012). <em>R in a nutshell: A desktop quick reference</em>, 2. izdanje. O’Reilly Media, Inc.</p>
 </div>
 
 
