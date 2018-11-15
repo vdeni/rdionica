@@ -2,7 +2,9 @@
 
 all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pdf\
 	../kod/priprema_podaci_upitnik.R\
-	../docs/r_uvod.html ../tekstovi/r_uvod.pdf ../kod/r_uvod.R
+	../docs/r_uvod.html ../tekstovi/r_uvod.pdf ../kod/r_uvod.R\
+	../radne-biljeznice/priprema_podaci_upitnik.R\
+	../radne-biljeznice/r_uvod.R\
 
 ../kod/%.R: %.ipynb
 	jupytext -o $@ $<
@@ -23,3 +25,6 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 
 ../tekstovi/%.pdf: ../kod/%.R
 	Rscript -e 'rmarkdown::render("$<", output_format = "pdf_document", output_dir = "../tekstovi")'
+
+../radne-biljeznice/%.R: ../kod/%.R
+	cp $< $@

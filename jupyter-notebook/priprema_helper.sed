@@ -16,6 +16,6 @@ knitr::opts_chunk$set(collapse=T, fig.pos='!h')
 
 /install.packages/ i\#+ eval=F
 
-/^DataExplorer::create_report(podaci)$/ i\#+ eval=F
+/zgodno-korisna i bez njih/ a\#+ eval=F
 
 /^print(skimr::skim.*/ i\#+ eval=F
