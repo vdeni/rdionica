@@ -1,25 +1,25 @@
 .PHONY: all
-.SUFFIXES: .R .html .pdf
 
-all: priprema_podaci_upitnik.html priprema_podaci_upitnik.pdf priprema_podaci_upitnik.R\
-	r_uvod.html r_uvod.pdf r_uvod.R
+all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pdf\
+	../kod/priprema_podaci_upitnik.R\
+	../docs/r_uvod.html ../tekstovi/r_uvod.pdf ../kod/r_uvod.R
 
-%.R: %.ipynb
+../kod/%.R: %.ipynb
 	jupytext -o $@ $<
 	sed -e '/slidesh/d;/.*coding: utf.*/d' $@ > tmp.txt
 	mv tmp.txt $@
-	if [ $@ = 'priprema_podaci_upitnik.R' ];\
+	if [ $@ = '../kod/priprema_podaci_upitnik.R' ];\
 	    then\
 	    sed -f priprema_helper.sed $@ > tmp.txt;\
 	    mv tmp.txt $@;\
-	elif [ $@ = 'r_uvod.R' ];\
+	elif [ $@ = '../kod/r_uvod.R' ];\
 	    then\
 	    sed -Ef uvod_helper.sed $@ > tmp.txt;\
 	    mv tmp.txt $@;\
 	fi
 
-.R.html:
+../docs/%.html: ../kod/%.R
 	Rscript -e 'rmarkdown::render("$<", output_format = "html_document", output_dir = "../docs")'
 
-.R.pdf:
+../tekstovi/%.pdf: ../kod/%.R
 	Rscript -e 'rmarkdown::render("$<", output_format = "pdf_document", output_dir = "../tekstovi")'
