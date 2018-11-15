@@ -1,0 +1,15 @@
+name: "rdionica"
+output_dir: "docs"
+navbar:
+  title: "Rdionica"
+  left:
+    - text: "Home"
+  href: index.html
+    - text "Uvod u R"
+  href: r_uvod.html
+    - text: "Priprema podataka koristeći tidyverse"
+  href: priprema_podaci_upitnik.html
+output:
+  html_document:
+    theme: cosmo
+
