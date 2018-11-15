@@ -1,7 +1,14 @@
-1 a\#' title: "Rdionica: priprema datoteke `podaci_upitnik.csv` za obradu"\
+1 a\#' title: ""\
 #' author: "Denis Vlašiček"\
 #' date: ""\
-#' toc: true\
+#' output:\
+#'     html_document:\
+#'         theme: lumen\
+#'         highlight: tango\
+#'         toc: true\
+#'         toc_float: true\
+#'     pdf_document:\
+#'         toc: true
 
 /^options/ {
 N

@@ -10,4 +10,6 @@ navbar:
         - text: "Priprema podataka koristeći tidyverse"
           href: priprema_podaci_upitnik.html
 output:
-    html_document
+    html_document:
+        theme: lumen
+        highlight: tango
