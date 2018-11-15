@@ -11,4 +11,3 @@ navbar:
           href: priprema_podaci_upitnik.html
 output:
     html_document:
-        theme: cosmo
