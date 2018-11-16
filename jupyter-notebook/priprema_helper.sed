@@ -26,3 +26,7 @@ knitr::opts_chunk$set\(collapse=T, fig.pos='!h'\)
 /^print\(skimr::skim.*/ i\#+ eval=F
 
 /^#' #+/ i\#'
+
+/^#' #{3} %\$%/ a\#'
+
+/^#' #{3} \*/ a\#'

@@ -265,6 +265,7 @@ za_graf %>% {plot(.$y, .$x)}
 
 #'
 #' ### %$%
+#'
 
 #' `%$%` je *variable exposition* pipa. Ona nam daje direktan pristup varijablama koje se nalaze u objektu kojim baratamo.
 #'
