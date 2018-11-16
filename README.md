@@ -19,3 +19,5 @@ Struktura repozitorija je ovakva:
 - `jupyter-notebook` sadrži jupyter notebookove na temelju kojih su nastale
     prezentacije i `R` skripte, a iz kojih su nastali `html` i `pdf` dokumenti
     te radne bilježnice. Također sadrži neke pomoćne skripte.
+
+`html` dokumenti - iliti tekstovi/skripte u obliku web-stranice - mogu se naći [ovdje](https://vdeni.github.io/rdionica/) (funkcionalno, ali radovi su još u tijeku).
