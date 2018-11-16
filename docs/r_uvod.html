@@ -1554,15 +1554,15 @@ div.tocify {
 <a class="sourceLine" id="cb2-9" title="9"></a>
 <a class="sourceLine" id="cb2-10" title="10"><span class="dv">3</span><span class="op">^</span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb2-11" title="11"><span class="co">## [1] 9</span></a></code></pre></div>
-<p>Poseban operator koji nekad zna biti koristan je <em>modulo</em> - <code>%%</code> - koji vraća cijelobrojni dio dijeljenja dvaju brojeva. Na primjer:</p>
+<p>Poseban operator koji nekad zna biti koristan je <em>modulo</em> - <code>%%</code> - koji vraća ostatak dijeljenja dvaju brojeva. Na primjer:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># (Linije koje sadrže komentare započinju sa znakom #. R ne interpretira te linije.)</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co"># Obično dijeljenje:</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">## [1] 2.5</span></a>
 <a class="sourceLine" id="cb3-5" title="5"></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co"># Modulo</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="dv">6</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">## [1] 0</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dv">5</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">## [1] 1</span></a></code></pre></div>
 <p>Naravno, kao i u pješačkoj matematici, i u R-u je potrebno paziti na grupiranje matematičkih izraza.</p>
 <p><code>x + y / z</code> je <span class="math inline">\(x + (y / z)\)</span> je <span class="math inline">\(x + \frac{z}{y}\)</span></p>
 <p><code>(x + y) / z</code> je <span class="math inline">\((x + y) / z\)</span> je <span class="math inline">\(\frac{x+y}{z}\)</span>.</p>

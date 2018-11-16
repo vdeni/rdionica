@@ -54,14 +54,14 @@ knitr::opts_chunk$set(collapse=T)
 
 3^2
 
-#' Poseban operator koji nekad zna biti koristan je *modulo* - `%%` - koji vraća cijelobrojni dio dijeljenja dvaju brojeva. Na primjer:
+#' Poseban operator koji nekad zna biti koristan je *modulo* - `%%` - koji vraća ostatak dijeljenja dvaju brojeva. Na primjer:
 
 # (Linije koje sadrže komentare započinju sa znakom #. R ne interpretira te linije.)
 # Obično dijeljenje:
 5 / 2
 
 # Modulo
-6 %% 2
+5 %% 2
 
 #' Naravno, kao i u pješačkoj matematici, i u R-u je potrebno paziti na grupiranje matematičkih izraza.
 #'
