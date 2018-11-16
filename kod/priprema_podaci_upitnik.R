@@ -4,8 +4,6 @@
 #' date: ""
 #' output:
 #'     html_document:
-#'         theme: lumen
-#'         highlight: tango
 #'         toc: true
 #'         toc_float: true
 #'     pdf_document:
@@ -16,7 +14,7 @@
 #'       extension: .R
 #'       format_name: spin
 #'       format_version: '1.0'
-#'       jupytext_version: 0.8.4
+#'       jupytext_version: 0.8.5
 #'   kernelspec:
 #'     display_name: R 3.5
 #'     language: R
@@ -33,6 +31,7 @@
 knitr::opts_chunk$set(collapse=T, fig.pos='!h')
 
 
+#'
 #' # Rdionica: priprema datoteke `podaci_upitnik.csv` za obradu
 
 #+ eval=F
@@ -73,6 +72,7 @@ library(wrapr)
 # olakšava korištenje relativnih file pathova
 library(here)
 
+#'
 #' ## Učitavanje podatka
 
 #' Za početak, pogledat ćemo kako izgledaju naši sirovi podaci.
@@ -81,6 +81,7 @@ library(here)
 #'
 #' Vidjet ćemo kako učitati tri vrste datoteka: SPSS-ov `.sav`, Excelov `.xls/xlsx` te generički *comma separated values* file - `.csv`.
 
+#'
 #' ### SPSS - .sav
 
 #' `.sav` datoteke možemo učitati koristeći funkciju `read_sav` iz paketa `haven` (dio `tidyversea`). Funkcija kao argument prima samo put do datoteke koju želimo učitati.
@@ -101,6 +102,7 @@ head(podaci_spss)
 #'
 #' Ovaj problem lako možemo riješiti tako da otvorimo izvornu bazu podataka i samo napravimo find and replace kako bismo uklonili zarez smutnje. Lako ga je riješiti ako imamo SPSS. Druga opcija je korištenje besplatnog online `.sav` -> `.csv` konvertera (link se nalazi u referencama). Time ćemo dobiti datoteku koju možemo otvoriti u nekom text editoru (recimo, Notepadu), te učiniti potrebne promjene (opet find and replace). Treći način je, naravno, prtljanje po podacima u R-u, što ćemo ostaviti za kraj radionice.
 
+#'
 #' ### Excel - .xls(x)
 
 #' Podatke u `.xlsx` (`.xls`) formatu možemo lako učitati pomoću funkcije `read_xlsx` (`read_xls`) iz paketa `readxl`. `readxl` je dio `tidyversea`, ali se ne učitava zajedno njim, tako da ga moramo posebno učitavati.
@@ -111,6 +113,7 @@ head(podaci_eksl)
 
 str(podaci_eksl)
 
+#'
 #' ### Comma separated values - .csv
 
 #' *Comma separeted value* datoteke su točno to što ime kaže - podaci koji su strukturirani kao vrijednosti odvojene zarezima, gdje se svaki unos (na primjer sudionik) nalazi u zasebnom redu, a vrijednosti varijabli koje su uz njega povezane ispisane su redom i odvojene su zarezima.
@@ -188,6 +191,7 @@ psych::describe(.)
 
 #' I dalje nije korisno za `character` varijable, ali omogućava digresiju u svijet pipa.
 
+#'
 #' ## Pipe
 
 #' Pipe su posebni operatori iz `magrittr` paketa. One omogućavaju kraće i, često, razumljivije pisanje koda.
@@ -198,6 +202,7 @@ psych::describe(.)
 
 #' Sad ćemo proći kroz pipe koje `magrittr` nudi.
 
+#'
 #' ### %>%
 
 #' Kao što je rečeno, ovo je osnovna pipa.
@@ -258,6 +263,7 @@ za_graf %>% {plot(.$y, .$x)}
 #'
 #' No, osim zatvaranja izraza s desne strane u zagrade, možemo iskoristiti jednu drugu pipu.
 
+#'
 #' ### %$%
 
 #' `%$%` je *variable exposition* pipa. Ona nam daje direktan pristup varijablama koje se nalaze u objektu kojim baratamo.
@@ -274,6 +280,7 @@ za_graf %$% plot(y, x)
 #'
 #' Imamo pipu i za to.
 
+#'
 #' ### %T>%
 
 #' T-pipa (izvorno *tee*) vraća izraz s lijeve strane umjesto izraza s desne strane. Zbog toga, možemo učiniti sljedeće:
@@ -286,6 +293,7 @@ sum(a,b)
 
 #' Preostaje nam još jedna pipa...
 
+#'
 #' ### %<>%
 
 #' `%<>%` je *assignment* pipa. Ona istovremeno daje vrijednost s lijeve strane za argument i piše u nju. To nam omogućuje da neku varijablu provučemo kroz seriju transformacijskih koraka i da te transformacije odmah pohranimo.
@@ -299,6 +307,7 @@ str(za_graf)
 
 #' Ovime završavamo upoznavanje s pipama. Nakratko se vraćamo natrag na primjer s funkcijom `describe`, nakon čega ponovno odlazimo u uzbudljivu digresiju.
 
+#'
 #' ## dplyr::select i dplyr::filter
 
 #' Već smo ranije vidjeli funkciju `select`, koja nam je omogućila da izaberemo 3 od 64 stupca iz `data.framea` `podaci`. Za odabiranje pojedinih **redova** koji zadovoljavaju određeni logički izraz možemo koristiti funkciju `filter`.
@@ -336,6 +345,7 @@ psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternaliza
 #' - `one_of`, koju treba koristiti kad `selectu` dajemo `character` vektor; na primjer, ako imena varijabli koje želimo zahvatiti spremimo u varijablu
 #' - `matches`, koji nam omogućava da odaberemo varijable čija imena odgovaraju nekom **regularnom izrazu**
 
+#'
 #' ## Regularni izrazi
 
 #' Regularni izrazi (eng. *regular expressions*, *regex* ili *regexp*) su stringovi koji označavaju neki uzorak za pretraživanje. Na primjer, sve ove izraze
@@ -353,8 +363,10 @@ psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternaliza
 
 #' U ovom dijelu ćemo pogledati osnove regularnih izraza, koje ćemo nadograđivati kroz ostatak radionice.
 
+#'
 #' ### Kvantifikatori
 
+#'
 #' #### *
 
 #' Kao što je već rečeno, `*` označava **0 ili više** ponavljanja **znaka** koji mu prethodi. *Znak* se ovdje odnosi na doslovni znak, na klasu znakova ili na grupu znakova. S klasama i grupama ćemo se upoznati malo kasnije.
@@ -363,6 +375,7 @@ psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternaliza
 
 stringr::str_detect(string = qc(kobilaaaa, maajka, celer), pattern = 'a*') %>% print(.)
 
+#'
 #' #### +
 
 #' `+` označava **jedno (1) ili više** ponavljanja prethodnog znaka/klase znakova/grupe znakova.
@@ -379,6 +392,7 @@ stringr::str_extract(qc(kobilaaaa, maajka, celer), 'a+') %>% print(.)
 
 stringr::str_detect(qc(kobilaaaa, maajka, celer), 'a+') %>% print(.)
 
+#'
 #' #### ?
 
 #' Upitnik označavao **0 ili jedno (1)** ponavljanje.
@@ -387,6 +401,7 @@ qc(kobilaaaa, maajka, celer) %>%
 stringr::str_extract_all(., 'a?') %>%
 print(.)
 
+#'
 #' #### {n,m}
 
 #' Ova sintaksa nam omogućava da specificiramo koliko ponavljanja želimo. Postoje tri valjane kombinacije:
@@ -407,6 +422,7 @@ stringr::str_extract_all(., 'i{3,}') %>% print(.)
 qc(string, striing, striiing, striiiiiiiiiiiiiiiiing) %>%
 stringr::str_extract_all(., 'i{17}') %>% print(.)
 
+#'
 #' ### Klase znakova
 
 #' Pretraživanja koja smo dosad vidjeli su jednostavna i jako umjetna. U stvarnim primjenama uglavnom nećemo pokušavati uhvatiti jedno slovo, nego znakove određenog tipa (kao što su brojke) ili određene skupine znakova (npr. brojeve 1, 7 ili 5). U te svrhe, koristimo **klase znakova**.
@@ -463,6 +479,7 @@ stringr::str_subset(., '[[:upper:]]{2}\\d{3}[[:upper:]]')
 
 #' Zasad ćemo proći još samo kroz grupe znakova.
 
+#'
 #' ### Grupe znakova
 
 #' Znakove možemo grupirati koristeći obične zagrade (`(...)`). Grupe spajaju znakove u jednu cjelinu. To nam, primjerice, omogućuje da ponavljajuće uzorke lako kvantificiramo.
@@ -477,6 +494,7 @@ print(.)
 #'
 #' NB: Ne stavljati razmake oko alternatora jer će se to tumačiti kao razmak koji treba tražiti u stringu!
 
+#'
 #' ### Vježbica
 
 #' Radili smo longitudinalno istraživanje s dvije točke mjerenja. Svojim dragim sudionicima napisali smo jednostavnu formulu za stvaranje šifre: prva dva slova imena majke, posljednje dvije znamenke mobitela i prva dva slova imena rodnog grada.
@@ -502,6 +520,7 @@ stringr::str_subset(., '(ZA|KA)\\d{2}(ZA|KA)')
 
 #' Time završavamo digresivne tokove i bacamo se na borbu s podacima.
 
+#'
 #' ## Nastavak pripreme podataka
 
 #' Zasad smo pogledali strukturu podatka (`str`), kako izgledaju sirovi podaci (`head` i `tail`) te neke statističke sažetke (`describe` i `summary`, `skimr`).
@@ -514,6 +533,7 @@ str(podaci)
 
 #' Za početak, iskoristit ćemo moći opažanja i primijetiti da su varijable koje počinju s `pi` (osim `pi_age`) spremljene kao `character` vektori. Taj tip vrijednosti nije zgodan za većinu obrada koje bismo mogli htjeti raditi i razlog je zašto nam `summary` vraća nekoristan sažetak.
 
+#'
 #' ### Baratanje kategoričkim varijablama
 
 #' Stoga, pretvorit ćemo te varijable iz `charactera` u `factore`.
@@ -583,6 +603,7 @@ forcats::fct_recode(., 'elem-sch' = "Elementary School", 'hi-sch' = "High school
 
 levels(podaci$pi_education)
 
+#'
 #' ### Vježba
 
 #' Pokušajte napraviti isto s varijablom `pi_income`.
@@ -610,6 +631,7 @@ str(podaci$pi_income)
 
 #' Nećemo prolaziti kroz rekodiranje svih faktora, ali hoćemo proći kroz rekodiranje nacionalnosti, zato jer nam to daje mogućnost da se igramo sa stringovima i regularnim izrazima.
 
+#'
 #' ### Kodiranje nacionalnosti (pitanje otvorenog tipa)
 
 #' Pitanje o nacionalnosti bilo je otvorenog tipa, tako da ista nacionalnost može biti reprezentirana na različite načine.
@@ -657,6 +679,7 @@ podaci$pi_nationality %<>%
            TRUE ~ .)} %>%
 as.factor(.)
 
+#'
 #' ### Preimenovanje varijabli
 
 #' Nekad su imena varijabli jako nezgrapna, neinformativna, mutava i slično. Budući da ćete se prije ili poslije susresti s takvim imenima, proći ćemo kroz nekoliko načina za mijenjanje imena varijabli.
@@ -762,6 +785,7 @@ colnames(lijepo) %<>%
 stringr::str_replace(., '^x(\\d_[[:lower:]]+).*', '\\1')
 print(lijepo)
 
+#'
 #' ### Obrnuto kodiranje varijabli
 
 #' Neka od pitanja u ovom upitnik potrebno je obrnuto kodirati. To možemo učiniti pomoću funkcije `reverse.code` iz `psych` paketa. Ta funkcija ima dva obavezna argumenta: `keys`, koji je vektor brojki `1` i `-1`, te `items`, što su čestice koje treba rekodirati.
@@ -811,6 +835,7 @@ tibble::add_column(podaci,
 
 colnames(podaci) %>% print(.)
 
+#'
 #' ### Brisanje stupaca
 
 #' Ponekad se u podacima nađu varijable koje nam nisu potrebne, pa je zgodno znati kako ih možemo obrisati. Za potrebe ove demonstracije, obrisat ćemo dvije varijable - `mf_CareHarm` i `mf_FairnessCheating` - koje su ukupni rezultati na dvije subskale MFQ-a.
@@ -828,6 +853,7 @@ dplyr::select(-mf_FairnessCheating)
 
 str(podaci)
 
+#'
 #' ### Stvaranje nove varijable pomoću `mutate`
 
 #' Već smo vidjeli neke načine na koje možemo stvarati nove varijable. Sada ćemo pomoću funkcije `mutate` rekreirati dva stupca koja smo malo prije obrisali.
@@ -864,6 +890,7 @@ dplyr::mutate(.,
 dplyr::select(., 1:mf_SanctityDegradation, mf_CareHarm, mf_FairnessCheating,
               dplyr::everything())
 
+#'
 #' ## Long i wide formati podataka
 
 #' Podaci kojima cijelo vrijeme baratamo nalaze se u **wide** formatu - svaki red predstavlja jedan *case* (u našem slučaju sudionika), a svaki stupac predstavlja jednu varijablu. Često, to je format s kojim želimo raditi.
@@ -905,6 +932,7 @@ podaci_long %>%
 tidyr::spread(., key = pitanje, value = odgovor) %>%
 dplyr::arrange(., sub_index)
 
+#'
 #' ## Motivacijski primjeri - vizualizacija podataka
 
 #' U ovom dugoočekivanom, posljednjem dijelu proći ćemo kroz par motivacijskih primjera koji pokazuju razne zgodnosti koje nam R nudi. Za početak, pogledat ćemo osnove vizualizacije podataka.
@@ -972,6 +1000,7 @@ psych::pairs.panels(., lm = T, method = 'spearman',
                    # boljeg dojma o broju jedinki
                    jiggle = T)
 
+#'
 #' ## Motivacijski primjeri - missing data
 
 #' Za početak, ubacit ćemo neke missing vrijednosti (`NA`) u naš set podataka.
@@ -1120,6 +1149,7 @@ naniar::gg_miss_fct(., fct = pi_education)
 
 #' Ovdje, recimo, možemo vidjeti da nitko ili gotovo nitko tko je završio osnovnu školu ili doktorat nije odgovorio na osmo pitanje u `attitudesAndNorms08`, što nije pretjerano zabrinjavajuće jer su podaci simulirani, ali bi se u stvarnoj situaciji čovjek možda htio zapitati.
 
+#'
 #' ## Prtljanje po podacima iz SPSS-a za opće dobro
 
 #' Kao što je na početku najavljeno, proći ćemo kroz R-ovsko prtljanje po korumpiranim podacima iz SPSS-a.
@@ -1261,6 +1291,7 @@ dim(podaci_spss_korumpirani)
 podaci_spss %<>%
 rbind(., podaci_spss_korumpirani)
 
+#'
 #' ## Reference i dodatna literatura
 
 #' [Grolemund, G. i Wickham, H. *R for data science*. O'Reilly Media, Inc.](https://r4ds.had.co.nz/)
@@ -1293,6 +1324,7 @@ rbind(., podaci_spss_korumpirani)
 #' Pretvaranje `.sav` fileova u `.csv`
 #' - https://pspp.benpfaff.org/
 
+#'
 #' ## Epilog
 
 sessionInfo() 

@@ -3,8 +3,6 @@
 #' date: ""\
 #' output:\
 #'     html_document:\
-#'         theme: lumen\
-#'         highlight: tango\
 #'         toc: true\
 #'         toc_float: true\
 #'     pdf_document:\

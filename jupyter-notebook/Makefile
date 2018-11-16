@@ -12,7 +12,7 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 	mv tmp.txt $@
 	if [ $@ = '../kod/priprema_podaci_upitnik.R' ];\
 	    then\
-	    sed -f priprema_helper.sed $@ > tmp.txt;\
+	    sed -Ef priprema_helper.sed $@ > tmp.txt;\
 	    mv tmp.txt $@;\
 	elif [ $@ = '../kod/r_uvod.R' ];\
 	    then\
@@ -20,8 +20,12 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 	    mv tmp.txt $@;\
 	fi
 
-../docs/%.html: ../kod/%.R
-	Rscript -e 'rmarkdown::render("$<", output_format = "html_document", output_dir = "../docs")'
+../docs/%.R: ../kod/%.R
+	cp $< $@
+
+../docs/%.html: ../docs/%.R
+	Rscript -e 'rmarkdown::render("$<", output_format = "html_document")'
+	rm $<
 
 ../tekstovi/%.pdf: ../kod/%.R
 	Rscript -e 'rmarkdown::render("$<", output_format = "pdf_document", output_dir = "../tekstovi")'
