@@ -25,14 +25,14 @@ Struktura repozitorija je ovakva:
 Možete preuzeti cijeli repozitorij tako da (i) kliknete na zeleni gumb `Clone or
 download` te odaberete `Download ZIP`.
 
-![clone-or-dl]()
+![clone-or-dl](https://raw.githubusercontent.com/vdeni/rdionica/master/slike/clone-dl.png)
 
 Ili, (ii) možete otići na releases i skinuti određenu "formalnu" verziju
 repozitorija. Na primjer, repozitorij kakav je bio prije prvog ili drugog
 termina radionice.
 
 Prvo:
-![release]()
+![release](https://github.com/vdeni/rdionica/blob/master/slike/releases.png?raw=true)
 
 Drugo:
-![zip]()
+![zip](https://github.com/vdeni/rdionica/blob/master/slike/zip.png?raw=true)
