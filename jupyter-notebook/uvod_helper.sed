@@ -30,3 +30,7 @@ s/\$/\\)/g
 }
 
 /^#' #+ [[:alnum:]]+/ i\#'
+
+/^#'.*R razlikuje.*tipova podataka:/ a\#'
+
+/^#'.*Osim što.*se u sljedećem:/ a\#'

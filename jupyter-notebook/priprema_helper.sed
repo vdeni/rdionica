@@ -34,3 +34,13 @@ knitr::opts_chunk$set\(collapse=T, fig.pos='!h'\)
 /^#'.*Reference i dodatna.*/, /Epilog/ {
 /^#' [^-]/ a\#'
 }
+
+/^#'.*`select`. Druge su:/ a\#'
+
+/^#'.* tri valjane kombinacije:/ a\#'
+
+/^#'.*opažanja, uočili smo da:/ a\#'
+
+/^#' #+ ?\*/ a\#'
+
+/^#' Vidimo tri stvari/, /^#' Nastavit ću koristiti/ a\#'

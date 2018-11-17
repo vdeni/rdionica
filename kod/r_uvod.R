@@ -188,6 +188,7 @@ domace_zivotinje[4] == domace_zivotinje[length(domace_zivotinje)]
 #' ### Tipovi varijabli
 
 #' R razlikuje nekoliko osnovnih tipova podataka:
+#'
 #' - `character` : "stringovi", tj. tekstualni podaci. Npr. `'patka'`
 #' - `integer` : cijeli brojevi. Npr. `1`
 #' - `numeric` : realni brojevi. Npr. `1.161`
@@ -380,7 +381,7 @@ str(prihodi)
 
 #' U kodu gore, `ordered` i `levels` su imenovani (named) argumenti. Imenovani argumenti se razlikuju od pozicijskih (eng. *positional*) po tome što nije bitno kojim ih redoslijedom postavljamo. Isti efekt dobili bismo da smo prvo napisali `levels`, a potom `ordered`.
 #'
-#' Nekad se možemo izvući bez da argumente imenujemo, ali nekad će R baciti error, tako da tu razliku treba imati na umu.
+#' Nekad se možemo izvući bez da argumente imenujemo, ali nekad će R baciti error ili napraviti nešto, ali ne ono što očekujemo, tako da tu razliku treba imati na umu.
 
 #' Sad kad smo se upoznali s faktorima, prijeći ćemo na liste.
 
@@ -478,6 +479,7 @@ str(raznoliki_objekti$inception$glumci[[2]])
 #' Kao što možemo vidjeti, razlika između `[[]]` i `[]` gubi se kad se spustimo na najnižu razinu, tj. na dohvaćanje pojedinih elemenata vektora `glumci`.
 
 #' Osim što vraćaju različite objekte, `[[]]` i `[]` razlikuju se u sljedećem:
+#'
 #' - `[]` može dohvaćati više elemenata (npr. [1:5]), a `[[]]` samo jedan
 #' - `[[]]` može baratati parcijalnim imenima ako se argumentu `exact` da vrijednost `FALSE`, a `[]` nema tu mogućnost
 #+ error=T

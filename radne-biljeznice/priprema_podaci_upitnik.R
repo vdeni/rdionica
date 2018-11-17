@@ -154,20 +154,35 @@ tail(podaci, 3)
 summary(podaci[, wrapr::qc(attitudesAndNorms01, pi_education, pi_gender)])
 
 #' Vidimo tri stvari: (1) `summary` nije pretjerano koristan za varijable koje su tipa `character` i (2-3) pojavili su se nova sintaksa i nova funkcija.
+#'
 
+#'
 #' `qc` je funkcija iz paketa `wrapr` koja nas oslobađa pisanja navodnika pri korištenju funkcije `c`. `qc` je, dakle, *quoted combine*.
+#'
 
+#'
 #' Korištenjem `::` sintakse označili smo da je funkcija `qc` iz paketa `wrapr`. Pri pozivanju funkcija iz paketa **nije nužno** pisati `::`; to smo vidjeli kod pozivanja funkcije `read_csv` iz paketa `readr`.
+#'
 
+#'
 #' Ipak, važno je znati tu sintaksu iz dva razloga.
+#'
 
+#'
 #' Prvo, korištenjem `::` možemo pozvati funkciju iz paketa koji prethodno nismo učitali.
+#'
 
+#'
 #' Drugo, u slučaju da dva paketa imaju funkcije koje se jednako zovu, `::` nam omogućava da specificiramo koju funkciju želimo pozvati. Budući da smo učitali paket `conflicted`, R će nas upozoriti ako dođe do konflikta te nas tražiti da specificiramo koju funkciju hoćemo pozvati, koristeći `::`.
+#'
 
+#'
 #' Iskoristit ćemo trenutak i upoznati se s još jednom zgodnom funkcijom za dobivanje deskriptivnih podataka: `skim`. Radi preglednosti, probrat ćemo par varijabli različitih tipova.
+#'
 
+#'
 #' Nastavit ću koristiti `::` notaciju tako da bude jasno iz kojeg paketa dolazi koja funkcija (osim ako je spomenuto u tekstu ili ako je funkcija iz base R-a).
+#'
 
 #+ eval=F
 print(skimr::skim(podaci[, qc(pi_education, attitudesAndNorms01,
@@ -335,6 +350,7 @@ psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternaliza
                                                 moralIdentityInternalization05)])
 
 #' `contains` je jedna od nekoliko pomoćnih funkcija koje su super za `select`. Druge su:
+#'
 #' - `starts_with`, koja odabire varijable koje počinju s određenim stringom
 #' - `ends_with`, isto, samo za kraj
 #' - `one_of`, koju treba koristiti kad `selectu` dajemo `character` vektor; na primjer, ako imena varijabli koje želimo zahvatiti spremimo u varijablu
@@ -363,6 +379,7 @@ psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternaliza
 
 #'
 #' #### *
+#'
 
 #' Kao što je već rečeno, `*` označava **0 ili više** ponavljanja **znaka** koji mu prethodi. *Znak* se ovdje odnosi na doslovni znak, na klasu znakova ili na grupu znakova. S klasama i grupama ćemo se upoznati malo kasnije.
 
@@ -400,6 +417,7 @@ print(.)
 #' #### {n,m}
 
 #' Ova sintaksa nam omogućava da specificiramo koliko ponavljanja želimo. Postoje tri valjane kombinacije:
+#'
 #' - `{n,m}` znači od `n` do `m`
 #' - `{n,}` znači `n` ili više
 #' - `{n}` znači točno `n`
@@ -502,6 +520,7 @@ sifre <- qc(BR83ZA, KA15ZA, RA75BJ, PE43SP,
             BR83ZG, ZA15KA, RA75BJ, PE43ST)
 
 #' Koristeći moći opažanja, uočili smo da:
+#'
 #' - su neki sudionici u drugoj točki mjerenja umjesto prva dva slova imena rodnog grada pisali registarsku oznaku rodnog grada
 #' - je jedan sudionik zamijenio mjesto prvih slova imena majke i prvih slova imena rodnog grada.
 
