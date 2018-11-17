@@ -4,7 +4,7 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 	../kod/priprema_podaci_upitnik.R\
 	../docs/r_uvod.html ../tekstovi/r_uvod.pdf ../kod/r_uvod.R\
 	../radne-biljeznice/priprema_podaci_upitnik.R\
-	../radne-biljeznice/r_uvod.R\
+	../radne-biljeznice/r_uvod.R ../docs/index.html\
 
 ../kod/%.R: %.ipynb
 	jupytext -o $@ $<
@@ -34,3 +34,6 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 	cp $< $@
 	sed -f ../radne-biljeznice/prep.sed $@ > tmp.txt
 	mv tmp.txt $@
+
+../docs/index.html: ../docs/index.Rmd
+	Rscript -e 'rmarkdown::render("$<")'

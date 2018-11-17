@@ -30,3 +30,7 @@ knitr::opts_chunk$set\(collapse=T, fig.pos='!h'\)
 /^#' #{3} %\$%/ a\#'
 
 /^#' #{3} \*/ a\#'
+
+/^#'.*Reference i dodatna.*/, /Epilog/ {
+/^#' [^-]/ a\#'
+}
