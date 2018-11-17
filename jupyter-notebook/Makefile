@@ -32,3 +32,5 @@ all: ../docs/priprema_podaci_upitnik.html ../tekstovi/priprema_podaci_upitnik.pd
 
 ../radne-biljeznice/%.R: ../kod/%.R
 	cp $< $@
+	sed -f ../radne-biljeznice/prep.sed $@ > tmp.txt
+	mv tmp.txt $@

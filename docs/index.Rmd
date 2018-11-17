@@ -1,3 +1,10 @@
 ---
-title: 'test'
+title: 'Rdionica'
 ---
+
+Dobrodšli na poluslužbene stranice Rdionice - serije radionica namijenjenih učenju programskog jezika R.
+
+Trneutačno dostupni tutoriali u sklopu Rdionice su:
+
+- [Uvod u R](https://vdeni.github.io/rdionica/r_uvod.html) 
+- [Priprema podataka koristeći `tidyverse`](https://vdeni.github.io/rdionica/priprema_podaci_upitnik.html)

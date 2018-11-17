@@ -2,19 +2,13 @@
 #' title: ""
 #' author: "Denis Vlašiček"
 #' date: ""
-#' output:
-#'     html_document:
-#'         toc: true
-#'         toc_float: true
-#'     pdf_document:
-#'         toc: true
 #' jupyter:
 #'   jupytext:
 #'     text_representation:
 #'       extension: .R
 #'       format_name: spin
 #'       format_version: '1.0'
-#'       jupytext_version: 0.8.5
+#'       jupytext_version: 0.8.4
 #'   kernelspec:
 #'     display_name: R 3.5
 #'     language: R
@@ -774,7 +768,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'smisli me!')
+stringr::str_replace(., 'smisli me!', 'i mene!')
 print(lijepo)
 
 #'

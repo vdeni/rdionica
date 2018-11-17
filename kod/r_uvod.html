@@ -1414,58 +1414,6 @@ button.code-folding-btn:focus {
 </style>
 
 
-<style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 54px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-
-.section h2 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-.section h3 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-.section h4 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-.section h5 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-.section h6 {
-  padding-top: 59px;
-  margin-top: -59px;
-}
-</style>
-
-<script>
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
-
-  // mark it active
-  menuAnchor.parent().addClass('active');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
-});
-</script>
-
 
 <div class="container-fluid main-container">
 
@@ -1578,35 +1526,6 @@ div.tocify {
 
 
 
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Rdionica</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="r_uvod.html">Uvod u R</a>
-</li>
-<li>
-  <a href="priprema_podaci_upitnik.html">Priprema podataka koristeći tidyverse</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
 <div class="fluid-row" id="header">
 
 
@@ -1642,10 +1561,10 @@ div.tocify {
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">## [1] 2.5</span></a>
 <a class="sourceLine" id="cb3-5" title="5"></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co"># Modulo</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="dv">5</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dv">3</span> <span class="op">%%</span><span class="st"> </span><span class="dv">2</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">## [1] 1</span></a></code></pre></div>
 <p>Naravno, kao i u pješačkoj matematici, i u R-u je potrebno paziti na grupiranje matematičkih izraza.</p>
-<p><code>x + y / z</code> je <span class="math inline">\(x + (y / z)\)</span> je <span class="math inline">\(x + \frac{y}{z}\)</span></p>
+<p><code>x + y / z</code> je <span class="math inline">\(x + (y / z)\)</span> je <span class="math inline">\(x + \frac{z}{y}\)</span></p>
 <p><code>(x + y) / z</code> je <span class="math inline">\((x + y) / z\)</span> je <span class="math inline">\(\frac{x+y}{z}\)</span>.</p>
 </div>
 <div id="funkcije" class="section level2">
@@ -1658,8 +1577,8 @@ div.tocify {
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># navodnici su bitni! ali mogu biti jednostruki ili dvostruki,</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="co"># bitno je samo da je riječ omeđena jednakim parom</span></a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="co"># npr &#39;a&#39; je oke, &quot;a&#39; nije oke, ali zato &quot;a&quot; je</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&#39;patka&#39;</span>, <span class="st">&quot;krava&quot;</span>, <span class="st">&#39;pile&#39;</span>, <span class="st">&quot;pas&quot;</span>))</a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="co">## [1] &quot;patka&quot; &quot;krava&quot; &quot;pile&quot;  &quot;pas&quot;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">print</span>(<span class="kw">c</span>(<span class="st">&#39;patka&#39;</span>, <span class="st">&quot;krava&quot;</span>, <span class="st">&#39;pile&#39;</span>, <span class="st">&quot;pesa&quot;</span>))</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">## [1] &quot;patka&quot; &quot;krava&quot; &quot;pile&quot;  &quot;pesa&quot;</span></a>
 <a class="sourceLine" id="cb5-6" title="6"></a>
 <a class="sourceLine" id="cb5-7" title="7"><span class="kw">print</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb5-8" title="8"><span class="co">## [1] 5 4 3 2 1</span></a></code></pre></div>
@@ -1703,18 +1622,18 @@ div.tocify {
 <a class="sourceLine" id="cb11-14" title="14"><span class="kw">exists</span>(<span class="st">&#39;Denis&#39;</span>)</a>
 <a class="sourceLine" id="cb11-15" title="15"><span class="co">## [1] FALSE</span></a></code></pre></div>
 <p>Sad kad znamo kako varijablama pripisati vrijednosti, možemo spremiti vektore koje smo ranije napravili koristeći <code>c</code>. Neovisno o tome što <em>možemo</em> koristiti svašta za imena varijabli, trebali bismo se truditi imena učiniti smislenima. Dugoročno, to će nas poštedjeti puno mentalnog (a nekad i R-ovskog) napora. Također, savjetovao bih da izbjegavate korištenje “hrvatskih” znakova (č, ć, ž, š, đ) u svom kodu; korištenje tih znakova može izazvati snažne glavobolje.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">domace_zivotinje &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;patka&#39;</span>, <span class="st">&#39;krava&#39;</span>, <span class="st">&#39;pile&#39;</span>, <span class="st">&#39;pas&#39;</span>)</a>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">domace_zivotinje &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;patka&#39;</span>, <span class="st">&#39;krava&#39;</span>, <span class="st">&#39;pile&#39;</span>, <span class="st">&#39;pesa&#39;</span>)</a>
 <a class="sourceLine" id="cb12-2" title="2"></a>
 <a class="sourceLine" id="cb12-3" title="3">brojevi.<span class="fl">5.</span>do<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)</a></code></pre></div>
 <p>Kao i kad smo varijabli <code>a</code> pripisali vrijednost <code>2</code>, ni sada ne dobivamo nikakav output u konzoli. Ali možemo koristiti <code>print</code> ili samo upisati ime varijable u konzolu kako bismo dobili njenu vrijednost.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">print</span>(domace_zivotinje)</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="co">## [1] &quot;patka&quot; &quot;krava&quot; &quot;pile&quot;  &quot;pas&quot;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co">## [1] &quot;patka&quot; &quot;krava&quot; &quot;pile&quot;  &quot;pesa&quot;</span></a>
 <a class="sourceLine" id="cb13-3" title="3"></a>
 <a class="sourceLine" id="cb13-4" title="4"><span class="kw">print</span>(brojevi.<span class="fl">5.</span>do<span class="fl">.1</span>)</a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="co">## [1] 5 4 3 2 1</span></a></code></pre></div>
 <p>Sad kad smo svoje vektore pripisali varijablama, možemo dohvaćati pojedine vrijednosti iz njih. Na primjer, ako želimo dohvatiti prvu vrijednost iz vektora <code>domace_zivotinje</code>, možemo učiniti ovo:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">domace_zivotinje[<span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co">## [1] &quot;pas&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co">## [1] &quot;pesa&quot;</span></a></code></pre></div>
 <p><code>4</code> je, u ovom slučaju, <strong>indeks</strong>. U R-u, za razliku od većine drugih programskih jezika, indeksiranje započinje s <code>1</code>, a ne s <code>0</code>.</p>
 <p>Za dohvaćanje trećeg elementa iz vektora <code>brojevi.5.do.1</code> izvršili bismo:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">brojevi.<span class="fl">5.</span>do<span class="fl">.1</span>[<span class="dv">3</span>]</a>
@@ -1725,11 +1644,11 @@ div.tocify {
 <p>Budući da broj elemenata ujedno označava i posljednji element, možemo učiniti sljedeće:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># dohvaćanje pomoću indeksa</span></a>
 <a class="sourceLine" id="cb17-2" title="2">domace_zivotinje[<span class="dv">4</span>]</a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="co">## [1] &quot;pas&quot;</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co">## [1] &quot;pesa&quot;</span></a>
 <a class="sourceLine" id="cb17-4" title="4"></a>
 <a class="sourceLine" id="cb17-5" title="5"><span class="co"># dohvacanje pomocu funkcije length()</span></a>
 <a class="sourceLine" id="cb17-6" title="6">domace_zivotinje[<span class="kw">length</span>(domace_zivotinje)]</a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="co">## [1] &quot;pas&quot;</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">## [1] &quot;pesa&quot;</span></a>
 <a class="sourceLine" id="cb17-8" title="8"></a>
 <a class="sourceLine" id="cb17-9" title="9"><span class="co"># iskoristit ćemo priliku i pokazati kako možemo usporediti dvije vrijednosti</span></a>
 <a class="sourceLine" id="cb17-10" title="10">domace_zivotinje[<span class="dv">4</span>] <span class="op">==</span><span class="st"> </span>domace_zivotinje[<span class="kw">length</span>(domace_zivotinje)]</a>
@@ -1852,16 +1771,16 @@ div.tocify {
 <a class="sourceLine" id="cb30-9" title="9"><span class="co">## 5      5    fe  FALSE</span></a></code></pre></div>
 <p>Pri stvaranju novog <code>data.framea</code>, svi redovi moraju imati vrijednosti na svim stupcima jer će se R inače požaliti.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"></a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="kw">print</span>(<span class="kw">data.frame</span>(<span class="st">&#39;brojke&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">data.frame</span>(<span class="st">&#39;brojke&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
 <a class="sourceLine" id="cb31-3" title="3">           <span class="st">&#39;slova&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;de&#39;</span>, <span class="st">&#39;ce&#39;</span>, <span class="st">&#39;fe&#39;</span>),</a>
 <a class="sourceLine" id="cb31-4" title="4">           <span class="co"># maknuli smo zadnjji element (F) iz stupca &#39;logike&#39;</span></a>
-<a class="sourceLine" id="cb31-5" title="5">           <span class="st">&#39;logike&#39;</span>=<span class="st"> </span><span class="kw">c</span>(F, F, T, T)))</a>
+<a class="sourceLine" id="cb31-5" title="5">           <span class="st">&#39;logike&#39;</span>=<span class="st"> </span><span class="kw">c</span>(F, F, T, T))</a>
 <a class="sourceLine" id="cb31-6" title="6"><span class="co">## Error in data.frame(brojke = c(1, 2, 3, 4, 5), slova = c(&quot;a&quot;, &quot;b&quot;, &quot;de&quot;, : arguments imply differing number of rows: 5, 4</span></a></code></pre></div>
 <p>Tome možemo doskočiti tako što ćemo eksplicitno neku vrijednost proglasiti nedostajućom, što činimo pomoću posebne vrijednosti <code>NA</code>:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">print</span>(<span class="kw">data.frame</span>(<span class="st">&#39;brojke&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">data.frame</span>(<span class="st">&#39;brojke&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
 <a class="sourceLine" id="cb32-2" title="2">           <span class="st">&#39;slova&#39;</span> =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;de&#39;</span>, <span class="st">&#39;ce&#39;</span>, <span class="st">&#39;fe&#39;</span>),</a>
 <a class="sourceLine" id="cb32-3" title="3">           <span class="co"># umjesto posljednjeg elementa u stupcu &#39;logike&#39; stavili smo NA</span></a>
-<a class="sourceLine" id="cb32-4" title="4">           <span class="st">&#39;logike&#39;</span>=<span class="st"> </span><span class="kw">c</span>(F, F, T, T, <span class="ot">NA</span>)))</a>
+<a class="sourceLine" id="cb32-4" title="4">           <span class="st">&#39;logike&#39;</span>=<span class="st"> </span><span class="kw">c</span>(F, F, T, T, <span class="ot">NA</span>))</a>
 <a class="sourceLine" id="cb32-5" title="5"><span class="co">##   brojke slova logike</span></a>
 <a class="sourceLine" id="cb32-6" title="6"><span class="co">## 1      1     a  FALSE</span></a>
 <a class="sourceLine" id="cb32-7" title="7"><span class="co">## 2      2     b  FALSE</span></a>
@@ -1878,7 +1797,7 @@ div.tocify {
 <a class="sourceLine" id="cb33-7" title="7">           <span class="st">&#39;slova&#39;</span> =<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>],</a>
 <a class="sourceLine" id="cb33-8" title="8">           <span class="st">&#39;logike&#39;</span>=<span class="st"> </span><span class="kw">c</span>(F, F, T, T, <span class="ot">NA</span>))</a>
 <a class="sourceLine" id="cb33-9" title="9"></a>
-<a class="sourceLine" id="cb33-10" title="10"><span class="kw">print</span>(brojke_i_slova)</a>
+<a class="sourceLine" id="cb33-10" title="10">brojke_i_slova</a>
 <a class="sourceLine" id="cb33-11" title="11"><span class="co">##    brojke slova logike</span></a>
 <a class="sourceLine" id="cb33-12" title="12"><span class="co">## 1       1     a  FALSE</span></a>
 <a class="sourceLine" id="cb33-13" title="13"><span class="co">## 2       2     b  FALSE</span></a>
@@ -1915,7 +1834,7 @@ div.tocify {
 <a class="sourceLine" id="cb35-6" title="6"><span class="co">## 3      3     c   TRUE</span></a></code></pre></div>
 <p>Za dohvaćanje vrijednosti koje nisu uzastopne, možemo koristiti funkciju <code>c</code>, koju također možemo kombinirati s <code>n:m</code> sintaksom:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># prva tri reda i redovi 7 do 12, te stupci 1 i 3</span></a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="kw">print</span>(brojke_i_slova[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">12</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)])</a>
+<a class="sourceLine" id="cb36-2" title="2">brojke_i_slova[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">7</span><span class="op">:</span><span class="dv">12</span>), <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)]</a>
 <a class="sourceLine" id="cb36-3" title="3"><span class="co">##    brojke logike</span></a>
 <a class="sourceLine" id="cb36-4" title="4"><span class="co">## 1       1  FALSE</span></a>
 <a class="sourceLine" id="cb36-5" title="5"><span class="co">## 2       2  FALSE</span></a>
@@ -1927,7 +1846,7 @@ div.tocify {
 <a class="sourceLine" id="cb36-11" title="11"><span class="co">## 11     11  FALSE</span></a>
 <a class="sourceLine" id="cb36-12" title="12"><span class="co">## 12     12  FALSE</span></a></code></pre></div>
 <p>Stupcima možemo pristupati i pomoću njihovih imena:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">print</span>(brojke_i_slova[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="st">&#39;logike&#39;</span>, <span class="st">&#39;brojke&#39;</span>)])</a>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">brojke_i_slova[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="kw">c</span>(<span class="st">&#39;logike&#39;</span>, <span class="st">&#39;brojke&#39;</span>)]</a>
 <a class="sourceLine" id="cb37-2" title="2"><span class="co">##   logike brojke</span></a>
 <a class="sourceLine" id="cb37-3" title="3"><span class="co">## 1  FALSE      1</span></a>
 <a class="sourceLine" id="cb37-4" title="4"><span class="co">## 2  FALSE      2</span></a>
@@ -2162,23 +2081,11 @@ div.tocify {
 <a class="sourceLine" id="cb60-5" title="5"></a>
 <a class="sourceLine" id="cb60-6" title="6"><span class="kw">names</span>(raznoliki_objekti)</a>
 <a class="sourceLine" id="cb60-7" title="7"><span class="co">## [1] &quot;imena&quot;     &quot;brojevi&quot;   &quot;inception&quot;</span></a></code></pre></div>
-<p>Elementima možemo pristupati pomoću <code>[]</code> operatora, ali ne i pomoću <code>$</code> operatora. Također, pristupanje elementima pomoću indeksa nije isto kao kod <code>data.framea</code>. Naša matrica <code>postava</code> ima 3 reda i dva stupca. Pogledajmo sljedeći primjer:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># matrica manje od 4 reda i manje od 4 stupca.</span></a>
-<a class="sourceLine" id="cb61-2" title="2"><span class="co"># ipak, ovo funkcionira</span></a>
-<a class="sourceLine" id="cb61-3" title="3"><span class="kw">print</span>(postava[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</a>
-<a class="sourceLine" id="cb61-4" title="4"><span class="co">## [1] &quot;Neo&quot;         &quot;Morpheus&quot;    &quot;Agent Smith&quot; &quot;150&quot;</span></a>
-<a class="sourceLine" id="cb61-5" title="5"></a>
-<a class="sourceLine" id="cb61-6" title="6"><span class="co"># ovo također funkcionira</span></a>
-<a class="sourceLine" id="cb61-7" title="7"><span class="kw">print</span>(postava[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</a>
-<a class="sourceLine" id="cb61-8" title="8"><span class="co">##         ime           visina</span></a>
-<a class="sourceLine" id="cb61-9" title="9"><span class="co">## pametni &quot;Morpheus&quot;    &quot;165&quot; </span></a>
-<a class="sourceLine" id="cb61-10" title="10"><span class="co">## zli     &quot;Agent Smith&quot; &quot;140&quot;</span></a></code></pre></div>
-<p>U ovom slučaju, redovima su prikačena njihova imena.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># i ovo</span></a>
-<a class="sourceLine" id="cb62-2" title="2"><span class="kw">print</span>(postava[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;ime&#39;</span>])</a>
-<a class="sourceLine" id="cb62-3" title="3"><span class="co">##       pametni           zli </span></a>
-<a class="sourceLine" id="cb62-4" title="4"><span class="co">##    &quot;Morpheus&quot; &quot;Agent Smith&quot;</span></a></code></pre></div>
-<p>Ovdje se imena “redova” nalaze iznad svake vraćene vrijednosti (dakle, iznad <code>&quot;Morpheus&quot;</code> i <code>&quot;Agent Smith&quot;</code>) Ovime ćemo završiti uvod u R te se baciti na pripremu podataka za obradu.</p>
+<p>Elementima možemo pristupati pomoću <code>[]</code> operatora (po istom principu kao i kod <code>data.framea</code>), ali ne i pomoću <code>$</code> operatora.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">print</span>(postava[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="st">&#39;ime&#39;</span>])</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="co">##       pametni           zli </span></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="co">##    &quot;Morpheus&quot; &quot;Agent Smith&quot;</span></a></code></pre></div>
+<p>Ovime ćemo završiti uvod u R te se baciti na pripremu podataka za obradu.</p>
 </div>
 </div>
 <div id="reference" class="section level2">

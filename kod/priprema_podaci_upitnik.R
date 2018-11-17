@@ -14,7 +14,7 @@
 #'       extension: .R
 #'       format_name: spin
 #'       format_version: '1.0'
-#'       jupytext_version: 0.8.5
+#'       jupytext_version: 0.8.4
 #'   kernelspec:
 #'     display_name: R 3.5
 #'     language: R

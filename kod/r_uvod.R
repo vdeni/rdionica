@@ -14,7 +14,7 @@
 #'       extension: .R
 #'       format_name: spin
 #'       format_version: '1.0'
-#'       jupytext_version: 0.8.5
+#'       jupytext_version: 0.8.4
 #'   kernelspec:
 #'     display_name: R 3.5
 #'     language: R
@@ -63,7 +63,7 @@ knitr::opts_chunk$set(collapse=T)
 
 #' Naravno, kao i u pješačkoj matematici, i u R-u je potrebno paziti na grupiranje matematičkih izraza.
 #'
-#' `x + y / z` je \( x + (y / z) \) je \( x + \frac{z}{y} \)
+#' `x + y / z` je \( x + (y / z) \) je \( x + \frac{y}{z} \)
 #'
 #' `(x + y) / z` je \( (x + y) / z \) je \( \frac{x+y}{z} \).
 
@@ -83,7 +83,7 @@ sqrt(4)
 # navodnici su bitni! ali mogu biti jednostruki ili dvostruki,
 # bitno je samo da je riječ omeđena jednakim parom
 # npr 'a' je oke, "a' nije oke, ali zato "a" je
-print(c('patka', "krava", 'pile', "pesa"))
+print(c('patka', "krava", 'pile', "pas"))
 
 print(c(5, 4, 3, 2, 1))
 
@@ -137,7 +137,7 @@ exists('Denis')
 
 #' Sad kad znamo kako varijablama pripisati vrijednosti, možemo spremiti vektore koje smo ranije napravili koristeći `c`. Neovisno o tome što *možemo* koristiti svašta za imena varijabli, trebali bismo se truditi imena učiniti smislenima. Dugoročno, to će nas poštedjeti puno mentalnog (a nekad i R-ovskog) napora. Također, savjetovao bih da izbjegavate korištenje "hrvatskih" znakova (č, ć, ž, š, đ) u svom kodu; korištenje tih znakova može izazvati snažne glavobolje.
 
-domace_zivotinje <- c('patka', 'krava', 'pile', 'pesa')
+domace_zivotinje <- c('patka', 'krava', 'pile', 'pas')
 
 brojevi.5.do.1 <- c(5, 4, 3, 2, 1)
 
@@ -296,17 +296,17 @@ print(data.frame(brojke = c(1, 2, 3, 4, 5),
 #' Pri stvaranju novog `data.framea`, svi redovi moraju imati vrijednosti na svim stupcima jer će se R inače požaliti.
 #+ error=T
 
-data.frame('brojke' = c(1, 2, 3, 4, 5),
+print(data.frame('brojke' = c(1, 2, 3, 4, 5),
            'slova' = c('a', 'b', 'de', 'ce', 'fe'),
            # maknuli smo zadnjji element (F) iz stupca 'logike'
-           'logike'= c(F, F, T, T))
+           'logike'= c(F, F, T, T)))
 
 #' Tome možemo doskočiti tako što ćemo eksplicitno neku vrijednost proglasiti nedostajućom, što činimo pomoću posebne vrijednosti `NA`:
 
-data.frame('brojke' = c(1, 2, 3, 4, 5),
+print(data.frame('brojke' = c(1, 2, 3, 4, 5),
            'slova' = c('a', 'b', 'de', 'ce', 'fe'),
            # umjesto posljednjeg elementa u stupcu 'logike' stavili smo NA
-           'logike'= c(F, F, T, T, NA))
+           'logike'= c(F, F, T, T, NA)))
 
 #' Proširit ćemo ovaj `data.frame` s još nekim vrijednostima te ga spremiti u varijablu `brojke_i_slova`:
 
@@ -319,7 +319,7 @@ brojke_i_slova <-
            'slova' = letters[1:15],
            'logike'= c(F, F, T, T, NA))
 
-brojke_i_slova
+print(brojke_i_slova)
 
 #' Primjećujemo da se vrijednosti iz stupca `logike` ponavljaju. To funkcionira zato što je broj redova `data.framea` djeljiv s brojem elemenata koje smo stavili u vektor `logike` pri definiranju `data.framea` (imamo 15 redova, a vektor `logike` ima 5 elemenata).
 #'
@@ -343,11 +343,11 @@ brojke_i_slova[1:3, ]
 #' Za dohvaćanje vrijednosti koje nisu uzastopne, možemo koristiti funkciju `c`, koju također možemo kombinirati s `n:m` sintaksom:
 
 # prva tri reda i redovi 7 do 12, te stupci 1 i 3
-brojke_i_slova[c(1:3, 7:12), c(1, 3)]
+print(brojke_i_slova[c(1:3, 7:12), c(1, 3)])
 
 #' Stupcima možemo pristupati i pomoću njihovih imena:
 
-brojke_i_slova[1:3, c('logike', 'brojke')]
+print(brojke_i_slova[1:3, c('logike', 'brojke')])
 
 #' Naposljetku, **jednom** određenom stupcu možemo pristupiti koristeći `$` operator:
 
@@ -535,9 +535,23 @@ names(brojke_i_slova)
 
 names(raznoliki_objekti)
 
-#' Elementima možemo pristupati pomoću `[]` operatora (po istom principu kao i kod `data.framea`), ali ne i pomoću `$` operatora.
+#' Elementima možemo pristupati pomoću `[]` operatora, ali ne i pomoću `$` operatora. Također, pristupanje elementima pomoću indeksa nije isto kao kod `data.framea`.
 
+#' Naša matrica `postava` ima 3 reda i dva stupca. Pogledajmo sljedeći primjer:
+
+# matrica manje od 4 reda i manje od 4 stupca.
+# ipak, ovo funkcionira
+print(postava[1:4])
+
+# ovo također funkcionira
+print(postava[2:3, 1:2])
+
+#' U ovom slučaju, redovima su prikačena njihova imena.
+
+# i ovo
 print(postava[2:3, 'ime'])
+
+#' Ovdje se imena "redova" nalaze iznad svake vraćene vrijednosti (dakle, iznad `"Morpheus"` i `"Agent Smith"`)
 
 #' Ovime ćemo završiti uvod u R te se baciti na pripremu podataka za obradu.
 
