@@ -21,3 +21,18 @@ Struktura repozitorija je ovakva:
     te radne bilježnice. Također sadrži neke pomoćne skripte.
 
 `html` dokumenti - iliti tekstovi/skripte u obliku web-stranice - mogu se naći [ovdje](https://vdeni.github.io/rdionica/) (funkcionalno, ali radovi su još u tijeku).
+
+Možete preuzeti cijeli repozitorij tako da (i) kliknete na zeleni gumb `Clone or
+download` te odaberete `Download ZIP`.
+
+![clone-or-dl]()
+
+Ili, (ii) možete otići na releases i skinuti određenu "formalnu" verziju
+repozitorija. Na primjer, repozitorij kakav je bio prije prvog ili drugog
+termina radionice.
+
+Prvo:
+![release]()
+
+Drugo:
+![zip]()
