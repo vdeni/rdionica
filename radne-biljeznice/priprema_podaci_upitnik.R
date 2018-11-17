@@ -508,10 +508,10 @@ sifre <- qc(BR83ZA, KA15ZA, RA75BJ, PE43SP,
 #' Pokušajte (i) izvući sve sudionike čiji je rodni grad Zagreb ili Split te (ii) izvući sve šifre sudionika koji je zamijenio redoslijed imena majke i slova rodnog grada. Napišite potpuni regularni izraz (dakle, nema švercanja s `.*`)!
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_subset(., '\\w{2}\\d+(ZG|ST|ZA|SP)')
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_subset(., '(ZA|KA)\\d{2}(ZA|KA)')
 
 #' Time završavamo digresivne tokove i bacamo se na borbu s podacima.
 
@@ -605,6 +605,15 @@ levels(podaci$pi_education)
 #'
 #' Rekodirajte razine tako da `avg` označava `About the average`, a razine ispod i iznad toga označite dodavanjem odgovarajućeg broja minusa odnosno pluseva na kraj (npr. `avg-` ili `avg++`).
 
+podaci$pi_income %>% levels(.) %>% dput(.)
+
+podaci$pi_income %<>%
+forcats::fct_recode(., 'avg' = "About the average",
+                    'avg++' = "Much above the average",
+                    'avg--' = "Much below the average", 
+                    'avg+' = "Somewhat above the average",
+                    'avg-' = "Somewhat below the average")
+
 #' Ovdje možemo primijetiti da je redoslijed razina podosta besmislen, tako da ćemo ih izvrtiti tako da idu od najniže do najviše. To ćemo učiniti pomoću funkcije `fct_relevel`.
 
 podaci$pi_income %<>%
@@ -659,7 +668,7 @@ podaci$pi_nationality %>%
            TRUE ~ .)} %>% table(.)
 
 podaci$pi_nationality %<>%
-{dplyr::case_when(stringr::str_detect(., 'kopiraj me!') ~ 'american',
+{dplyr::case_when(stringr::str_detect(., 'usa?|american|united states.*|\\w+ americ') ~ 'american',
            str_detect(., 'dutch|french') ~ 'fr-nl',
            str_detect(., 'seychelles|turkish|white') ~ 'other',
            TRUE ~ .)} %>%
@@ -768,7 +777,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'i mene!')
+stringr::str_replace(., '^x(\\d_[[:lower:]]+).*', '\\1')
 print(lijepo)
 
 #'
@@ -1279,38 +1288,49 @@ rbind(., podaci_spss_korumpirani)
 
 #'
 #' ## Reference i dodatna literatura
+#'
 
 #' [Grolemund, G. i Wickham, H. *R for data science*. O'Reilly Media, Inc.](https://r4ds.had.co.nz/)
 #'
+#'
 #' [Michael Crawley (2012). *The R Book*.](https://www.cs.upc.edu/~robert/teaching/estadistica/TheRBook.pdf)
 #'
+#'
 #' Pipe
+#'
 #' - https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html
 #' - http://r4ds.had.co.nz/pipes.html
 #'
 #' Regularni izrazi
+#'
 #' - [jako dobar šalabahter](https://remram44.github.io/regex-cheatsheet/regex.html)
 #' - [još jedan](http://www.rexegg.com/regex-quickstart.html)
 #' - [stranica koja omogućuje isprobavanje različitih uzoraka na tekstu](https://regexr.com/)
 #' - [uvod u `stringr`](https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html)
 #'
 #' Data wrangling (dplyr i srodno):
+#'
 #' - [prvi od četiri dijela (linkovi na druge na dnu stranice) blogova o formatiranju podataka](https://suzanbaert.netlify.com/2018/01/dplyr-tutorial-1/)
 #'
 #' Korisni savjeti za organizaciju podataka u tablicama
+#'
 #' - Broman, K. W., & Woo, K. H. (2018). Data organization in spreadsheets. *The American Statistician, 72*(1), 2–10.
 #'
 #' `naniar`:
+#'
 #' - [intro](https://cran.r-project.org/web/packages/naniar/vignettes/getting-started-w-naniar.html)
 #' - [galerija vizualizacija](https://cran.r-project.org/web/packages/naniar/vignettes/naniar-visualisation.html)
 #'
 #' Šalabahteri (obavezno skinuti!)
+#'
 #' - [obavezno!](https://www.rstudio.com/resources/cheatsheets/)
 #'
 #' Pretvaranje `.sav` fileova u `.csv`
+#'
 #' - https://pspp.benpfaff.org/
 
 #'
 #' ## Epilog
+#'
 
 sessionInfo() 
