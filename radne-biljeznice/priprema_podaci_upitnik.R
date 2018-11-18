@@ -161,7 +161,7 @@ summary(podaci[, wrapr::qc(attitudesAndNorms01, pi_education, pi_gender)])
 #'
 
 #'
-#' Korištenjem `::` sintakse označili smo da je funkcija `qc` iz paketa `wrapr`. Pri pozivanju funkcija iz paketa **nije nužno** pisati `::`; to smo vidjeli kod pozivanja funkcije `read_csv` iz paketa `readr`.
+#' Korištenjem `::` sintakse označili smo da je funkcija `qc` iz paketa `wrapr`. Pri pozivanju funkcija iz paketa **nije nužno** pisati `::`; to smo vidjeli kod pozivanja funkcije `read_csv` iz paketa `readr` (ili `read_xls` ili `read_spss`).
 #'
 
 #'
@@ -503,7 +503,7 @@ qc(hehehe, hehahohohehe, hahahahihi) %>%
 stringr::str_extract_all(., '(ha|he){2}') %>%
 print(.)
 
-#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `CTRL-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
+#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGt-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
 #'
 #' NB: Ne stavljati razmake oko alternatora jer će se to tumačiti kao razmak koji treba tražiti u stringu!
 
@@ -527,10 +527,10 @@ sifre <- qc(BR83ZA, KA15ZA, RA75BJ, PE43SP,
 #' Pokušajte (i) izvući sve sudionike čiji je rodni grad Zagreb ili Split te (ii) izvući sve šifre sudionika koji je zamijenio redoslijed imena majke i slova rodnog grada. Napišite potpuni regularni izraz (dakle, nema švercanja s `.*`)!
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_subset(., '\\w{2}\\d+(ZG|ST|ZA|SP)')
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_subset(., '(ZA|KA)\\d{2}(ZA|KA)')
 
 #' Time završavamo digresivne tokove i bacamo se na borbu s podacima.
 
@@ -624,13 +624,26 @@ levels(podaci$pi_education)
 #'
 #' Rekodirajte razine tako da `avg` označava `About the average`, a razine ispod i iznad toga označite dodavanjem odgovarajućeg broja minusa odnosno pluseva na kraj (npr. `avg-` ili `avg++`).
 
-#' Ovdje možemo primijetiti da je redoslijed razina podosta besmislen, tako da ćemo ih izvrtiti tako da idu od najniže do najviše. To ćemo učiniti pomoću funkcije `fct_relevel`.
+podaci$pi_income %>% levels(.) %>% dput(.)
 
 podaci$pi_income %<>%
+forcats::fct_recode(., 'avg' = "About the average",
+                    'avg++' = "Much above the average",
+                    'avg--' = "Much below the average", 
+                    'avg+' = "Somewhat above the average",
+                    'avg-' = "Somewhat below the average")
+
+#' Ovdje možemo primijetiti da je redoslijed razina podosta besmislen, tako da ćemo ih izvrtiti tako da idu od najniže do najviše. To ćemo učiniti pomoću funkcije `fct_relevel`.
+
+podaci$pi_income %>%
 forcats::fct_relevel(., 'avg--', 'avg-', 'avg', 'avg+', 'avg++') %>%
 # još ćemo faktor pretvoriti u ordered
 factor(., ordered = T) %>%
 tail(., 10) %>% print(.)
+
+podaci$pi_income %<>%
+forcats::fct_relevel(., 'avg--', 'avg-', 'avg', 'avg+', 'avg++') %>%
+factor(., ordered = T)
 
 str(podaci$pi_income)
 
@@ -678,7 +691,7 @@ podaci$pi_nationality %>%
            TRUE ~ .)} %>% table(.)
 
 podaci$pi_nationality %<>%
-{dplyr::case_when(stringr::str_detect(., 'kopiraj me!') ~ 'american',
+{dplyr::case_when(stringr::str_detect(., 'usa?|american|united states.*|\\w+ americ') ~ 'american',
            str_detect(., 'dutch|french') ~ 'fr-nl',
            str_detect(., 'seychelles|turkish|white') ~ 'other',
            TRUE ~ .)} %>%
@@ -787,7 +800,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'i mene!')
+stringr::str_replace(., '^x(\\d_[[:lower:]]+).*', '\\1')
 print(lijepo)
 
 #'

@@ -167,7 +167,7 @@ summary(podaci[, wrapr::qc(attitudesAndNorms01, pi_education, pi_gender)])
 #'
 
 #'
-#' Korištenjem `::` sintakse označili smo da je funkcija `qc` iz paketa `wrapr`. Pri pozivanju funkcija iz paketa **nije nužno** pisati `::`; to smo vidjeli kod pozivanja funkcije `read_csv` iz paketa `readr`.
+#' Korištenjem `::` sintakse označili smo da je funkcija `qc` iz paketa `wrapr`. Pri pozivanju funkcija iz paketa **nije nužno** pisati `::`; to smo vidjeli kod pozivanja funkcije `read_csv` iz paketa `readr` (ili `read_xls` ili `read_spss`).
 #'
 
 #'
@@ -509,7 +509,7 @@ qc(hehehe, hehahohohehe, hahahahihi) %>%
 stringr::str_extract_all(., '(ha|he){2}') %>%
 print(.)
 
-#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `CTRL-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
+#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGt-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
 #'
 #' NB: Ne stavljati razmake oko alternatora jer će se to tumačiti kao razmak koji treba tražiti u stringu!
 
@@ -641,11 +641,15 @@ forcats::fct_recode(., 'avg' = "About the average",
 
 #' Ovdje možemo primijetiti da je redoslijed razina podosta besmislen, tako da ćemo ih izvrtiti tako da idu od najniže do najviše. To ćemo učiniti pomoću funkcije `fct_relevel`.
 
-podaci$pi_income %<>%
+podaci$pi_income %>%
 forcats::fct_relevel(., 'avg--', 'avg-', 'avg', 'avg+', 'avg++') %>%
 # još ćemo faktor pretvoriti u ordered
 factor(., ordered = T) %>%
 tail(., 10) %>% print(.)
+
+podaci$pi_income %<>%
+forcats::fct_relevel(., 'avg--', 'avg-', 'avg', 'avg+', 'avg++') %>%
+factor(., ordered = T)
 
 str(podaci$pi_income)
 
