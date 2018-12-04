@@ -87,6 +87,8 @@ podaci_spss <- read_sav(here('podaci', 'podaci_upitnik.sav'))
 #' To je jedan od načina koji osigurava reproducibilnost obrada pri prijenosu koda s jednog računala na drugo i lišava nas muke ručnog mijenjanja puteva do datoteka. Isto postižemo stvaranjem projekta u RStudiju. Osim na datoteku `.here`, funkcija `here` reagira i na datoteke sa sufiksom `.Rproj` (koje nastaju pri stvaranju RStudio projekta).
 
 #' Kad pogledamo učitane podatke, primjećujemo nešto neobično kod `pi_` varijabli.
+#'
+#' Koristeći funkciju `head` (`tail`) možemo pogledati, po defaultu, prvih (posljednjih) 6 redova tablice.
 
 head(podaci_spss)
 
@@ -101,12 +103,13 @@ head(podaci_spss)
 
 #' Podatke u `.xlsx` (`.xls`) formatu možemo lako učitati pomoću funkcije `read_xlsx` (`read_xls`) iz paketa `readxl`. `readxl` je dio `tidyversea`, ali se ne učitava zajedno njim, tako da ga moramo posebno učitavati.
 
-podaci_eksl <- read_xlsx(here('podaci', 'podaci_upitnik.xlsx'))
+podaci_eksl <- read_xlsx(path = here('podaci', 'podaci_upitnik.xlsx'))
 
 head(podaci_eksl)
 
 str(podaci_eksl)
 
+#'
 #'
 #' ### Comma separated values - .csv
 
@@ -125,7 +128,7 @@ str(podaci_eksl)
 
 #' U skladu s tom preporukom, koristit ćemo `read_csv`. Podatke iz datoteke `podaci_upitnik.csv` možemo učitati ovako:
 
-podaci <- read_csv(file = here('podaci', 'podaci_upitnik.csv'))
+podaci <- read_csv(here('podaci', 'podaci_upitnik.csv'))
 
 #' Poruka koju dobivamo obavještava nas o tome kako su određene varijable reprezentirane. Vidimo da su varijable koje počinju s `pi` reprezentirane kao `character`. Ako pozovemo funkciju `spec`, vidjet ćemo specifikacije svih varijabli.
 
@@ -138,8 +141,6 @@ str(podaci)
 #' `attr` nam omogućuje da pristupimo raznim **atributima** objekata u R-u. Ovdje, dakle, pristupamo atributu `spec` objekta `podaci`, te ga brišemo upisujući vrijednost `NULL`.
 
 attr(podaci, 'spec') <- NULL
-
-#' Funkcije `head` i `tail` omogućuju nam da na brzinu vidimo (po defaultu) prvih 6 odnosno posljednjih 6 redova tablice.
 
 head(podaci)
 
@@ -196,7 +197,7 @@ print(skimr::skim(podaci[, qc(pi_education, attitudesAndNorms01,
 podaci %>%
 dplyr::select(., attitudesAndNorms01:attitudesAndNorms03,
               mf_CareHarm, pi_income, pi_education) %>%
-psych::describe(.)
+psych::describe(.) %>% print(.)
 
 #' I dalje nije korisno za `character` varijable, ali omogućava digresiju u svijet pipa.
 
@@ -204,7 +205,7 @@ psych::describe(.)
 #' ## Pipe
 
 #' Pipe su posebni operatori iz `magrittr` paketa. One omogućavaju kraće i, često, razumljivije pisanje koda.
-#'
+
 #' Pipa uzima output izraza sa svoje lijeve strane i daje ga kao argument funkciji na svojoj desnoj strani.
 
 #' Osnovna pipa je `%>%`. Ona se nalazi i u paketu `dplyr` (koji se učitava kad učitamo `tidyverse`) i u paketu `magrittr`. Posebno smo učitali `magrittr` jer s njim dolaze i neke pipe kojih nema u `dplyru`.
@@ -226,7 +227,7 @@ psych::describe(.)
 
 (2 + 2) %>% sqrt
 
-sqrt(2 + 2)
+(2 + 2)^(1/2)
 
 #' Trenutačno ne izgleda kao neka ušteda, što je u redu. Kasnije ćemo vidjeti primjere u kojima su pipe dosta zgodnije.
 
@@ -240,11 +241,11 @@ x <- 1:10
 # vektor koji ćemo sad stvoriti treba ići na y os
 # ovaj kod jednak je ovom -> 11:20 %>% plot(., x)
 # plot je također generička funkcija
-11:20 %>% plot(x)
+11:20 %>% plot(x,.)
 
 #' Da bismo izbjegli takvo ponašanje, možemo eksplicitno napisati točku, ili izraz opkoliti vitičastim zagradama.
 
-11:20 %>% plot(x, .)
+11:20 %>% {plot(x, .)}
 
 #' Sad ćemo `x` staviti u `data.frame` i pridružiti mu `y`.
 
@@ -269,7 +270,7 @@ za_graf %>% plot(.$y, .$x)
 za_graf %>% {plot(.$y, .$x)}
 
 #' Da se smanje takve konfuzije, neki preporučuju da se `.` uvijek piše, tako da je to praksa koju ćemo ovdje usvojiti.
-#'
+
 #' No, osim zatvaranja izraza s desne strane u zagrade, možemo iskoristiti jednu drugu pipu.
 
 #'
@@ -277,14 +278,14 @@ za_graf %>% {plot(.$y, .$x)}
 #'
 
 #' `%$%` je *variable exposition* pipa. Ona nam daje direktan pristup varijablama koje se nalaze u objektu kojim baratamo.
-#'
+
 #' Gornji problem mogli bismo riješiti i ovako:
 
 za_graf %$% plot(y, x)
 
 #' Možemo kombinirati različite pipe. Na primjer:
 
-1:10 %>% data.frame(a = ., b = 11:20) %$% plot(b, a)
+1:10 %>% data.frame (a = ., b = 11:20) %>% {plot(y = .$b, x = .$a)}
 
 #' U gornjem primjeru bi nam možda bilo zgodno da možemo pogledati strukturu `data.framea` nakon što ga stvorimo ili napraviti još neke operacije nakon što plotamo varijable.
 #'
@@ -330,11 +331,11 @@ str(za_graf)
 
 podaci %>%
 dplyr::filter(., pi_gender == 'Female') %>%
-dplyr::select(., dplyr::contains('internal',
-                                 # igore.case govori treba li
-                                 # poštivati ili ignorirati
-                                 # malo/veliko slovo
-                                 ignore.case = T)) %T>% str(.) %>%
+dplyr::select(., dplyr::contains('Internal',
+                                # igore.case govori treba li
+                                # poštivati ili ignorirati
+                                # malo/veliko slovo
+                                ignore.case = T)) %T>% str(.) %>%
 psych::describe(.)
 
 # base R rješenje za usporedbu
@@ -476,7 +477,11 @@ stringr::str_detect(., '\\$')
 registracije$mjesta %>%
 stringr::str_subset(., '^[SB][[:lower:]]+\\s[[:upper:]][[:lower:]]+')
 
-#' Možemo definirati i custom klasu znakova koji se **ne smiju** nalaziti na nekom mjestu. To radimo tako da na početak svoje klase stavimo znak `^` (`[^...]`). Na primjer, možemo tražiti stringove koji ne počinju slovom S ili B:
+#' Možemo definirati i custom klasu znakova koji se **ne smiju** nalaziti na nekom mjestu. To radimo tako da na početak svoje klase stavimo znak `^` (`[^...]`).
+#'
+#' NB: Ovdje treba obratiti pažnju na pozicioniranje znaka `-`. On mora dolaziti **odmah nakon otvarajuće** zagrade (ili iza `^` ako imamo negacijskju klasu) ili **neposredno prije** zatvarajuće zagrade. Pomoću znaka `-` možemo definirati raspone (npr. `0-9`), pa možemo dobiti error ili nešto neočekivano ako ga stavimo usred klase.
+
+#' Na primjer, možemo tražiti stringove koji ne počinju slovom S ili B:
 
 registracije$mjesta %>%
 stringr::str_subset(., '^[^SB].*')
@@ -503,7 +508,7 @@ qc(hehehe, hehahohohehe, hahahahihi) %>%
 stringr::str_extract_all(., '(ha|he){2}') %>%
 print(.)
 
-#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGt-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
+#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGr-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
 #'
 #' NB: Ne stavljati razmake oko alternatora jer će se to tumačiti kao razmak koji treba tražiti u stringu!
 
@@ -527,17 +532,17 @@ sifre <- qc(BR83ZA, KA15ZA, RA75BJ, PE43SP,
 #' Pokušajte (i) izvući sve sudionike čiji je rodni grad Zagreb ili Split te (ii) izvući sve šifre sudionika koji je zamijenio redoslijed imena majke i slova rodnog grada. Napišite potpuni regularni izraz (dakle, nema švercanja s `.*`)!
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_detect(., 'smisli me!')
 
 sifre %>%
-stringr::str_subset(., 'smisli me!')
+stringr::str_subset(., 'i mene!')
 
 #' Time završavamo digresivne tokove i bacamo se na borbu s podacima.
 
 #'
 #' ## Nastavak pripreme podataka
 
-#' Zasad smo pogledali strukturu podatka (`str`), kako izgledaju sirovi podaci (`head` i `tail`) te neke statističke sažetke (`describe` i `summary`, `skimr`).
+#' Zasad smo pogledali strukturu podatka (`str`), kako izgledaju sirovi podaci (`head` i `tail`) te neke statističke sažetke (`describe` i `summary`, `skim`).
 #'
 #' Sad ćemo se baciti na formatiranje sirovih podataka u nešto što nam je zgodnije za rad.
 
@@ -556,7 +561,7 @@ str(podaci)
 #'
 #' Uhvatit ćemo sve `pi` varijable osim `pi_age` te na njih primijeniti funkciju `as.factor`, koja će ih pretvoriti u `factore`.
 
-#' Budući da će `mutate_at` zadanu funkciju primijeniti na postojeće stupce, dobro je (a) biti siguran da biraš prave stupce i (b) biti siguran da radiš ono što želiš napraviti prije nego spremiš promjene.
+#' Budući da će `mutate_at` zadanu funkciju primijeniti na postojeće stupce, dobro je (a) uvjeriti se da biramo prave stupce i (b) uvjeriti se da radimo ono što želimo raditi prije nego što spremimo promjene.
 
 #' (a) ćemo riješiti koristeći `colnames` i `select`.
 
@@ -662,7 +667,7 @@ table(podaci$pi_nationality) %>% sort(., decreasing = T)
 #' Budući da ovdje imamo samo 100 sudionika i razmjerno malo različitih nacionalnosti, rekodiranje je lako.
 
 #' Za kodiranje nacionalnosti koristit ćemo funkciju `case_when`, koja nam omogućuje da specificiramo neki logički izraz (dakle, nešto što kao rezultat vraća `TRUE` ili `FALSE`) i akciju koju treba napraviti u `TRUE` slučaju.
-#'
+
 #' `case_when` za argumente prima logičke izraze i akcije odvojene tildom (`~`), pa pozivanje funkcije izgleda ovako:
 #'
 #' ```
@@ -689,7 +694,7 @@ podaci$pi_nationality %<>%
 as.factor(.)
 
 #'
-#' ### Preimenovanje varijabli
+#' # Preimenovanje varijabli
 
 #' Nekad su imena varijabli jako nezgrapna, neinformativna, mutava i slično. Budući da ćete se prije ili poslije susresti s takvim imenima, proći ćemo kroz nekoliko načina za mijenjanje imena varijabli.
 
@@ -763,7 +768,7 @@ ruzno <- data.frame('1. Molimo Vas, odaberite vaš ekonomski status:' = 1:5)
 print(ruzno)
 
 #' Svaki razmak postao je točka, zarez i dvotočka također su postali točke, a imenu varijable dodan je prefiks `X` (jer ime varijable ne može započinjati brojem!).
-#'
+
 #' Možemo pozvati funkciju `clean_names` iz paketa `janitor`, koja će od ružnih imena napraviti nešto ljepša.
 
 lijepo <- janitor::clean_names(ruzno)
@@ -772,7 +777,7 @@ print(lijepo)
 #' Ovisno o konkretnom imenu, ova će funkcija biti manje ili više korisna. Recimo, ako je potrebno u potpunosti preimenovati varijablu u nešto smisleno, nema druge nego ručno.
 #'
 #' Ipak, isplati se pozvati `clean_names` jer može uvelike olakšati automatizirano preimenovanje.
-#'
+
 #' Dodat ćemo još 2 ružna stupca u `data.frame` `ruzno`.
 
 ruzno %<>% data.frame(., '2. Koliko sam vina ja popio?' = 15:19,
@@ -781,7 +786,7 @@ print(ruzno)
 
 #' Vidimo da su i upitnici pretvoreni u točke.
 
-#' Recimo da hoćemo svako ime svesti na format `broj_prva-riječ`. Ako dopustimo R-u da obavi svoju masovnu konverziju, pa takva imena pretvaramo, mogli bismo imati problema (ili više nepotrebne patnje) sa specificiranjem obrasca koji želimo odbaciti.
+#' Recimo da hoćemo svako ime svesti na format `[broj pitanja]_[prva riječ]`. Ako dopustimo R-u da obavi svoju masovnu konverziju, pa takva imena pretvaramo, mogli bismo imati problema (ili više nepotrebne patnje) sa specificiranjem obrasca koji želimo odbaciti.
 
 #' Ponovno ćemo pozvati `clean_names`:
 
@@ -791,7 +796,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'i mene!')
+stringr::str_replace(., 'smisli me!', 'stavi nešto ovdje!')
 print(lijepo)
 
 #'
@@ -853,14 +858,14 @@ colnames(podaci) %>% print(.)
 
 podaci$mf_CareHarm <- NULL
 
-str(podaci)
+podaci %>% dplyr::select(., starts_with('mf_')) %>% str(.)
 
 #' Drugi je prepisivanje (u smislu *overwrite*) varijable koja drži `data.frame` `data.frameom` koji sadrži sve varijable osim te koju želimo ukloniti. To možemo učiniti pomoću funkcije `select` i negacijskog operatora `-`.
 
 podaci %<>%
 dplyr::select(-mf_FairnessCheating)
 
-str(podaci)
+podaci %>% dplyr::select(., starts_with('mf_')) %>% str(.)
 
 #'
 #' ### Stvaranje nove varijable pomoću `mutate`
@@ -921,7 +926,7 @@ podaci_wide
 podaci_wide
 
 #' `podaci_wide`, dakle, sadrži podskup `podataka`, u wide formatu. Sad ćemo taj `data.frame` prebaciti u long format, koristeći funkciju `gather` (kao, bacamo sve na hrpu) iz `tidyr` paketa.
-#'
+
 #' `gatheru` moramo dati neku tablicu s podacima (dakle, recimo, `data.frame`), odrediti ime varijable koja će služiti kao `key`, ime varijable koja će služiti kao `value`, te stupce koje želimo svesti na `key` - `value` format.
 
 podaci_wide %>%
@@ -932,10 +937,10 @@ podaci_long
 podaci_long
 
 #' Za prebacivanje natrag u wide format, koristimo `spread` (kao, bacanje đubreta po livadi).
-#'
+
 #' Ovoj funkciji trebamo dati podatke (recimo, `data.frame`), `key` koji želimo "rastaviti" i `value`, što su vrijednosti koje trebamo potpisati pod stupce nastale rastavljanjem `key`.
 #'
-#' `spread` uzima jedinstvene vrijednosti iz varijable navedene kao `key` i širi ih u nove varijable, koje potom puni vrijednostima zadanima pod `value.
+#' `spread` uzima jedinstvene vrijednosti iz varijable navedene kao `key` i širi ih u nove varijable, koje potom puni vrijednostima zadanima pod `value`.
 
 podaci_long %>%
 tidyr::spread(., key = pitanje, value = odgovor) %>%
@@ -960,8 +965,7 @@ podaci$mf_CareHarm %>% hist(.)
 
 #' A možemo dobiti i graf gustoće distribucije tako da varijablu prvo bacimo u funkciju `density`, a potom u `plot`.
 
-podaci$mf_FairnessCheating %>% density(.) %>%
-plot(.)
+plot(density(podaci$mf_FairnessCheating))
 
 #' Moje poznavanje base grafike staje otprilike ovdje jer za vizualizacije koristim paket `ggplot`, koji je nekad nešto zahtjevniji, ali je i dosta moćniji.
 
@@ -992,7 +996,7 @@ ggplot2::qplot(data = podaci, x = pi_gender,
 ggplot2::qplot(data = podaci, x = mf_FairnessCheating,
               geom = 'density', fill = pi_gender,
               # određuje razinu transparentnosti
-              alpha = .4)
+              alpha = .4) + theme_minimal()
 
 #' S `qplotom` (a pogotovo s `ggplotom`) se može puno igrati, tako da neću pretjerano nastavljati ovaj niz. Igranje prepuštam čitatelju.
 
