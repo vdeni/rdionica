@@ -709,7 +709,7 @@ podaci$pi_nationality %<>%
 as.factor(.)
 
 #'
-#' # Preimenovanje varijabli
+#' ### Preimenovanje varijabli
 
 #' Nekad su imena varijabli jako nezgrapna, neinformativna, mutava i slično. Budući da ćete se prije ili poslije susresti s takvim imenima, proći ćemo kroz nekoliko načina za mijenjanje imena varijabli.
 
@@ -962,7 +962,7 @@ tidyr::spread(., key = pitanje, value = odgovor) %>%
 dplyr::arrange(., sub_index)
 
 #'
-#' ## Motivacijski primjeri - vizualizacija podataka
+#' # Motivacijski primjeri - vizualizacija podataka
 
 #' U ovom dugoočekivanom, posljednjem dijelu proći ćemo kroz par motivacijskih primjera koji pokazuju razne zgodnosti koje nam R nudi. Za početak, pogledat ćemo osnove vizualizacije podataka.
 
@@ -1029,7 +1029,7 @@ psych::pairs.panels(., lm = T, method = 'spearman',
                    jiggle = T)
 
 #'
-#' ## Motivacijski primjeri - missing data
+#' # Motivacijski primjeri - missing data
 
 #' Za početak, ubacit ćemo neke missing vrijednosti (`NA`) u naš set podataka.
 
@@ -1178,7 +1178,7 @@ naniar::gg_miss_fct(., fct = pi_education)
 #' Ovdje, recimo, možemo vidjeti da nitko ili gotovo nitko tko je završio osnovnu školu ili doktorat nije odgovorio na osmo pitanje u `attitudesAndNorms08`, što nije pretjerano zabrinjavajuće jer su podaci simulirani, ali bi se u stvarnoj situaciji čovjek možda htio zapitati.
 
 #'
-#' ## Prtljanje po podacima iz SPSS-a za opće dobro
+#' # Prtljanje po podacima iz SPSS-a za opće dobro
 
 #' Kao što je na početku najavljeno, proći ćemo kroz R-ovsko prtljanje po korumpiranim podacima iz SPSS-a.
 
@@ -1320,7 +1320,7 @@ podaci_spss %<>%
 rbind(., podaci_spss_korumpirani)
 
 #'
-#' ## Reference i dodatna literatura
+#' # Reference i dodatna literatura
 #'
 
 #' [Grolemund, G. i Wickham, H. *R for data science*. O'Reilly Media, Inc.](https://r4ds.had.co.nz/)
