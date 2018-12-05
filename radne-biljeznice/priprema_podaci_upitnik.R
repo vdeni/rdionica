@@ -532,7 +532,7 @@ sifre <- qc(BR83ZA, KA15ZA, RA75BJ, PE43SP,
 #' Pokušajte (i) izvući sve sudionike čiji je rodni grad Zagreb ili Split te (ii) izvući sve šifre sudionika koji je zamijenio redoslijed imena majke i slova rodnog grada. Napišite potpuni regularni izraz (dakle, nema švercanja s `.*`)!
 
 sifre %>%
-stringr::str_detect(., 'smisli me!')
+stringr::str_subset(., 'smisli me!')
 
 sifre %>%
 stringr::str_subset(., 'i mene!')
@@ -673,7 +673,7 @@ table(podaci$pi_nationality) %>% sort(., decreasing = T)
 #' ```
 #' case_when(logički-izraz ~ akcija-ako-TRUE,
 #'           logički-izraz-2 ~ akcija-ako-TRUE-2)
-#'           ```
+#' ```
 
 podaci$pi_nationality %>%
 # case_when ovdje moramo obaviti u {} jer inače dobijemo error
@@ -796,7 +796,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'stavi nešto ovdje!')
+stringr::str_replace(., 'smisli me!', 'i mene!')
 print(lijepo)
 
 #'

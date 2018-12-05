@@ -541,7 +541,7 @@ names(raznoliki_objekti)
 
 #' Naša matrica `postava` ima 3 reda i dva stupca. Pogledajmo sljedeći primjer:
 
-# matrica manje od 4 reda i manje od 4 stupca.
+# matrica ima manje od 4 reda i manje od 4 stupca.
 # ipak, ovo funkcionira
 print(postava[1:4])
 
