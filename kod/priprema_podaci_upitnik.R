@@ -96,7 +96,11 @@ podaci_spss <- read_sav(here('podaci', 'podaci_upitnik.sav'))
 #'
 #' Koristeći funkciju `head` (`tail`) možemo pogledati, po defaultu, prvih (posljednjih) 6 redova tablice.
 
+#' Ove funkcije pomažu nam pri pregledavanju strukture podataka i njihovih sirovih vrijednosti.
+
 head(podaci_spss)
+
+tail(podaci_spss, 3)
 
 #' Kod nekih sudionika, unos pod `pi_education` je razdvojen u dva stupca, pri čemu je jedna vrijednost nasilno gurnuta u `pi_gender`. To je dovelo i do stvaranja nove varijable `V65`, koja sadrži vrijednosti koje bi se trebale javljati pod `pi_previous donations`. Dakle, kod nekih sudionika su vrijednosti iza `pi_education` pomaknute za jedno mjesto udesno.
 #'
@@ -149,10 +153,6 @@ str(podaci)
 attr(podaci, 'spec') <- NULL
 
 head(podaci)
-
-tail(podaci, 3)
-
-#' Ove funkcije pomažu nam pri pregledavanju strukture podataka i njihovih sirovih vrijednosti.
 
 #' Osnovnu deskriptivnu statistiku možemo dobiti pomoću generičke funkcije `summary`. Generičke funkcije primaju objekte različitih tipova, a njihov output ovisi o tipu objekta. Primjerice, ako u `summary` stavimo `data.frame`, dobit ćemo grubu deskriptivnu statistiku njegovih stupaca. Ako u funkciju stavimo regresijski model, dobit ćemo informacije o modelu.
 
@@ -233,7 +233,7 @@ psych::describe(.) %>% print(.)
 
 (2 + 2) %>% sqrt
 
-(2 + 2)^(1/2)
+sqrt((2 + 2))
 
 #' Trenutačno ne izgleda kao neka ušteda, što je u redu. Kasnije ćemo vidjeti primjere u kojima su pipe dosta zgodnije.
 
@@ -247,7 +247,7 @@ x <- 1:10
 # vektor koji ćemo sad stvoriti treba ići na y os
 # ovaj kod jednak je ovom -> 11:20 %>% plot(., x)
 # plot je također generička funkcija
-11:20 %>% plot(x,.)
+11:20 %>% plot(x)
 
 #' Da bismo izbjegli takvo ponašanje, možemo eksplicitno napisati točku, ili izraz opkoliti vitičastim zagradama.
 
@@ -291,7 +291,7 @@ za_graf %$% plot(y, x)
 
 #' Možemo kombinirati različite pipe. Na primjer:
 
-1:10 %>% data.frame (a = ., b = 11:20) %>% {plot(y = .$b, x = .$a)}
+1:10 %>% data.frame (a = ., b = 11:20) %$% plot(b, a)
 
 #' U gornjem primjeru bi nam možda bilo zgodno da možemo pogledati strukturu `data.framea` nakon što ga stvorimo ili napraviti još neke operacije nakon što plotamo varijable.
 #'
@@ -337,8 +337,8 @@ str(za_graf)
 
 podaci %>%
 dplyr::filter(., pi_gender == 'Female') %>%
-dplyr::select(., dplyr::contains('Internal',
-                                # igore.case govori treba li
+dplyr::select(., dplyr::contains('internal',
+                                # ignore.case govori treba li
                                 # poštivati ili ignorirati
                                 # malo/veliko slovo
                                 ignore.case = T)) %T>% str(.) %>%
@@ -705,8 +705,7 @@ podaci$pi_nationality %<>%
 {dplyr::case_when(stringr::str_detect(., 'usa?|american|united states.*|\\w+ americ') ~ 'american',
            str_detect(., 'dutch|french') ~ 'fr-nl',
            str_detect(., 'seychelles|turkish|white') ~ 'other',
-           TRUE ~ .)} %>%
-as.factor(.)
+           TRUE ~ .)}
 
 #'
 #' ### Preimenovanje varijabli
@@ -1006,12 +1005,12 @@ ggplot2::qplot(data = podaci, x = mf_FairnessCheating,
               geom = 'histogram')
 
 ggplot2::qplot(data = podaci, x = pi_gender,
-              y = mf_FairnessCheating, geom = 'violin')
+              y = mf_FairnessCheating, geom = 'boxplot')
 
 ggplot2::qplot(data = podaci, x = mf_FairnessCheating,
               geom = 'density', fill = pi_gender,
               # određuje razinu transparentnosti
-              alpha = .4) + theme_minimal()
+              alpha = .4)
 
 #' S `qplotom` (a pogotovo s `ggplotom`) se može puno igrati, tako da neću pretjerano nastavljati ovaj niz. Igranje prepuštam čitatelju.
 
