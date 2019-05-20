@@ -16,9 +16,16 @@ knitr::opts_chunk$set(collapse=T)
 
 /^\.3 <-/ i\#+ error=T
 
-/^for <- 5/ i\#+ error=T
+/^for <- 5/ i\#' ```
+/^for <- 5/ a\#' Error: unexpected assignment in "for <-"\n#' ```
+s/^for <- 5/#' for <- 5/
 
-/is\.numeric\(1,4141\)/ i\#+ error=T
+/is\.numeric\(1,4141\)/ i\#' ```
+/is\.numeric\(1,4141\)/ a\#' 2 arguments passed to 'is.numeric' which requires 1
+s/is\.numeric\(1,4141\)/#' is.numeric(1,4141)/
+
+/1,5151 \+ 1/ a\#' Error: unexpected ',' in "1,"\n#' ```
+s/1,5151 \+ 1/#' 1,5151 + 1/
 
 /.*svim stupcima jer će se R inače požaliti\./ a\#+ error=T
 

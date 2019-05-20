@@ -629,10 +629,6 @@ levels(podaci$pi_education)
 #'
 #' Rekodirajte razine tako da `avg` označava `About the average`, a razine ispod i iznad toga označite dodavanjem odgovarajućeg broja minusa odnosno pluseva na kraj (npr. `avg-` ili `avg++`).
 
-############################
-#### OVDJE NEŠTO FALI! #####
-############################
-
 #' Ovdje možemo primijetiti da je redoslijed razina podosta besmislen, tako da ćemo ih izvrtiti tako da idu od najniže do najviše. To ćemo učiniti pomoću funkcije `fct_relevel`.
 
 podaci$pi_income %>%
@@ -681,7 +677,7 @@ table(podaci$pi_nationality) %>% sort(., decreasing = T)
 
 podaci$pi_nationality %>%
 # case_when ovdje moramo obaviti u {} jer inače dobijemo error
-{dplyr::case_when(stringr::str_detect(., 'smisli me!') ~ 'american',
+{dplyr::case_when(stringr::str_detect(., 'usa?|american|united states.*|\\w+ americ') ~ 'american',
            str_detect(., 'dutch|french') ~ 'fr-nl',
            str_detect(., 'seychelles|turkish|white') ~ 'other',
            # akciju u svim nespecificiranim slučajevima određujemo
@@ -691,7 +687,7 @@ podaci$pi_nationality %>%
            TRUE ~ .)} %>% table(.)
 
 podaci$pi_nationality %<>%
-{dplyr::case_when(stringr::str_detect(., 'kopiraj me!') ~ 'american',
+{dplyr::case_when(stringr::str_detect(., 'usa?|american|united states.*|\\w+ americ') ~ 'american',
            str_detect(., 'dutch|french') ~ 'fr-nl',
            str_detect(., 'seychelles|turkish|white') ~ 'other',
            TRUE ~ .)}
@@ -799,7 +795,7 @@ print(lijepo)
 #' Ova imena su puno sustavnija, zbog čega je lakše napisati neki obrazac znakova koji želimo zadržati. Za primjer, svest ćemo imena varijabli na format `[broj pitanja]_[prva riječ]`.
 
 colnames(lijepo) %<>%
-stringr::str_replace(., 'smisli me!', 'i stavi nešto tu!')
+stringr::str_replace(., '^x(\\d_[[:lower:]]+).*', '\\1')
 print(lijepo)
 
 #'

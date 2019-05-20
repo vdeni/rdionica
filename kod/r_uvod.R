@@ -25,7 +25,7 @@
 #'     mimetype: text/x-r-source
 #'     name: R
 #'     pygments_lexer: r
-#'     version: 3.5.1
+#'     version: 3.6.0
 #' ---
 #+ setup, include=F, echo=F
 knitr::opts_chunk$set(collapse=T)
@@ -94,7 +94,7 @@ print(c(5, 4, 3, 2, 1))
 #'
 #' ## Varijable
 
-#' Kad god smo dosad izvršavali neke funkcije, baratali smo konkretnim vrijednostima (npr. `2 + 2`), a rezultati su ostali lebdjeti u eteru, nedostupni običnim ljudima.
+#' Kad god smo dosad izvršavali neke funkcije, baratali smo konkretnim vrijednostima (npr. `2 + 2`), a rezultati su ostali lebdjeti negdje u eteru.
 #'
 #' Kako bismo mogli baratati proizovljnim vrijednostima te kako bismo rezultati izvukli iz etera, uvodimo **varijable**.
 
@@ -111,15 +111,17 @@ print(a)
 3 -> b
 b
 
-#' Imena varijabli mogu sadržavati slova, brojeve, točke (`.`) i underscoreove (čija hrvatska imena ne znam; `_`). Imena varijabli ne mogu započinjati s točkom koju prati broj. Na primjer:
+#' Imena varijabli **mogu** sadržavati slova, brojeve, točke (`.`) i underscoreove (čije hrvatsko ime ne znam; `_`). Imena varijabli **ne mogu** započinjati s točkom koju prati broj. Na primjer:
 
 #+ error=T
 .3 <- 5
 
 #' Također, imena varijabli ne mogu biti izrazi koji su rezervirani u samom programskom jeziku, kao što je `for` (koji se koristi za iniciranje petlji).
 
-#+ error=T
-for <- 5
+#' ```
+#' for <- 5
+#' Error: unexpected assignment in "for <-"
+#' ```
 
 #' Funkcija koja zna biti zgodna kod imenovanja varijabli je `exists`, koja kao argument prima izraz u navodnicima (što je poznato kao **string**) te vraća `TRUE` ili `FALSE` ovisno o tom je li objekt istog imena pronađen ili ne.
 
@@ -147,7 +149,7 @@ print(domace_zivotinje)
 
 print(brojevi.5.do.1)
 
-#' Sad kad smo svoje vektore pripisali varijablama, možemo dohvaćati pojedine vrijednosti iz njih. Na primjer, ako želimo dohvatiti prvu vrijednost iz vektora `domace_zivotinje`, možemo učiniti ovo:
+#' Sad kad smo svoje vektore pripisali varijablama, možemo dohvaćati pojedine vrijednosti iz njih. Na primjer, ako želimo dohvatiti četvrtu vrijednost iz vektora `domace_zivotinje`, možemo učiniti ovo:
 
 domace_zivotinje[4]
 
@@ -171,6 +173,11 @@ domace_zivotinje[length(domace_zivotinje)]
 
 # iskoristit ćemo priliku i pokazati kako možemo usporediti dvije vrijednosti
 domace_zivotinje[4] == domace_zivotinje[length(domace_zivotinje)]
+
+#' <center>
+#'
+#' <img src="../images/IMG-20181101-WA0011.jpg" alt="Drawing" style="height: 600px;"/>
+#' </center>
 
 #' Ovo funkcionira jer evaluiranje, odnosno izvršavanje koda `length(domace_zivotinje)` kao rezultat vraća brojku `4`.
 
@@ -228,10 +235,13 @@ is.numeric(1.5115)
 
 #' Za pisanje decimalnih brojeva **moramo koristiti točku**.
 
-#+ error=T
-is.numeric(1,4141)
+#' ```
+#' is.numeric(1,4141)
+#' 2 arguments passed to 'is.numeric' which requires 1
 
-1,5151 + 1
+#' 1,5151 + 1
+#' Error: unexpected ',' in "1,"
+#' ```
 
 #' Posljednji tip je `logical`:
 
@@ -331,15 +341,15 @@ print(brojke_i_slova)
 #' Ako jedan od indeksa izostavimo, ali stavimo zarez, R će vratiti sve elemente na odgovarajućem mjestu, odnosno vratit će sve redove ako izostavimo prvi indeks i sve stupce ako izostavimo drugi indeks.
 
 # svi stupci prvog  reda
-brojke_i_slova[1, ]
+print(brojke_i_slova[1, ])
 
 # svi redovi prvog stupca
-brojke_i_slova[, 1]
+print(brojke_i_slova[, 1])
 
 #' Ovdje također možemo koristiti `n:m` sintaksu za dohvaćanje raspona vrijednosti. Na primjer, da bismo dohvatili prva tri reda i sve stupce `brojki_i_slova`, napravili bismo sljedeće:
 
 # prva tri reda, svi stupci
-brojke_i_slova[1:3, ]
+print(brojke_i_slova[1:3, ])
 
 #' Za dohvaćanje vrijednosti koje nisu uzastopne, možemo koristiti funkciju `c`, koju također možemo kombinirati s `n:m` sintaksom:
 
@@ -476,8 +486,6 @@ cat('==========\n')
 
 str(raznoliki_objekti$inception$glumci[[2]])
 
-#' Kao što možemo vidjeti, razlika između `[[]]` i `[]` gubi se kad se spustimo na najnižu razinu, tj. na dohvaćanje pojedinih elemenata vektora `glumci`.
-
 #' Osim što vraćaju različite objekte, `[[]]` i `[]` razlikuju se u sljedećem:
 #'
 #' - `[]` može dohvaćati više elemenata (npr. [1:5]), a `[[]]` samo jedan
@@ -493,7 +501,7 @@ str(raznoliki_objekti[[1:2]])
 
 str(raznoliki_objekti['ince', exact = F])
 
-#' Ovu ponešto supitlnu i prepredenu razliku se isplati imati a umu jer različite funkcije očekuju različite inpute, a lako im je nesvjesno gurati nešto što ne žele (na primjer listu umjesto `data.framea` koji se nalazi u listi).
+#' Ovu ponešto suptilnu i prepredenu razliku se isplati imati na umu jer različite funkcije očekuju različite inpute, a lako im je nesvjesno gurati nešto što ne žele (na primjer listu umjesto `data.framea` koji se nalazi u listi).
 
 #' Posljednja struktura koju ćemo pogledati je matrica.
 
@@ -534,7 +542,6 @@ print(colnames(postava))
 names(brojke_i_slova)
 
 # također, liste
-
 names(raznoliki_objekti)
 
 #' Elementima možemo pristupati pomoću `[]` operatora, ali ne i pomoću `$` operatora. Također, pristupanje elementima pomoću indeksa nije isto kao kod `data.framea`.
