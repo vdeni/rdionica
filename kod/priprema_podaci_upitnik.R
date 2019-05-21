@@ -25,7 +25,7 @@
 #'     mimetype: text/x-r-source
 #'     name: R
 #'     pygments_lexer: r
-#'     version: 3.5.1
+#'     version: 3.6.0
 #' ---
 #+ setup, include=F, echo=F
 knitr::opts_chunk$set(collapse=T, fig.pos='!h')
@@ -111,7 +111,7 @@ tail(podaci_spss, 3)
 #'
 #' ### Excel - .xls(x)
 
-#' Podatke u `.xlsx` (`.xls`) formatu možemo lako učitati pomoću funkcije `read_xlsx` (`read_xls`) iz paketa `readxl`. `readxl` je dio `tidyversea`, ali se ne učitava zajedno njim, tako da ga moramo posebno učitavati.
+#' Podatke u `.xlsx` (`.xls`) formatu možemo lako učitati pomoću funkcije `read_xlsx` (`read_xls`) iz paketa `readxl`. `readxl` je dio `tidyversea`, ali se ne učitava zajedno s njim, tako da ga moramo posebno učitavati.
 
 podaci_eksl <- read_xlsx(path = here('podaci', 'podaci_upitnik.xlsx'))
 
@@ -342,19 +342,19 @@ dplyr::select(., dplyr::contains('internal',
                                 # poštivati ili ignorirati
                                 # malo/veliko slovo
                                 ignore.case = T)) %T>% str(.) %>%
-psych::describe(.)
+psych::describe(.) %>% print(.)
 
 # base R rješenje za usporedbu
-str(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternalization01,
-                                                moralIdentityInternalization02,
-                                                moralIdentityInternalization03,
-                                                moralIdentityInternalization04,
-                                                moralIdentityInternalization05)])
-psych::describe(podaci[podaci$pi_gender == 'Female', qc(moralIdentityInternalization01,
-                                                moralIdentityInternalization02,
-                                                moralIdentityInternalization03,
-                                                moralIdentityInternalization04,
-                                                moralIdentityInternalization05)])
+str(podaci[podaci$pi_gender == 'Female', c('moralIdentityInternalization01',
+                                            'moralIdentityInternalization02',
+                                            'moralIdentityInternalization03',
+                                            'moralIdentityInternalization04',
+                                            'moralIdentityInternalization05')])
+psych::describe(podaci[podaci$pi_gender == 'Female', c('moralIdentityInternalization01',
+                                                        'moralIdentityInternalization02',
+                                                        'moralIdentityInternalization03',
+                                                        'moralIdentityInternalization04',
+                                                        'moralIdentityInternalization05')])
 
 #' `contains` je jedna od nekoliko pomoćnih funkcija koje su super za `select`. Druge su:
 #'
@@ -514,7 +514,7 @@ qc(hehehe, hehahohohehe, hahahahihi) %>%
 stringr::str_extract_all(., '(ha|he){2}') %>%
 print(.)
 
-#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGr-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha` ili `he`.
+#' Ovdje smo iskoristili i znak `|` (kod mene se nalazi na `AltGr-W` i zove se *pipe*), koji označava alternaciju, odnosno logičko ILI. Dakle, tražimo dva ponavljanja stringa `ha ili he`.
 #'
 #' NB: Ne stavljati razmake oko alternatora jer će se to tumačiti kao razmak koji treba tražiti u stringu!
 
